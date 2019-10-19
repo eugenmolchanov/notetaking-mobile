@@ -1,12 +1,24 @@
-import {Text, View} from "react-native";
 import React from "react";
+import { ListItem } from "react-native-elements";
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Text } from "react-native";
+
+const rightChevron = <Icon name="chevron-right" size={15}/>;
 
 const DisciplineListItem = (props) => {
+    const { discipline, navigation } = props;
     return (
-        <View style={{flexDirection: 'row', height: 30}}>
-            <Text style={{flex: 1}}>{props.discipline.abbreviation}</Text>
-            <Text style={{flex: 3}}>{props.discipline.name}</Text>
-        </View>
+        <ListItem
+            title={discipline.name}
+            titleStyle={{ textAlign: 'center' }}
+            chevron={rightChevron}
+            containerStyle={{ minHeight: 70 }}
+            onPress={() => navigation.navigate('Questions', {
+                questions: discipline.questions
+            })}
+            bottomDivider
+            leftElement={<Text>{discipline.abbreviation}</Text>}>
+        </ListItem>
     )
 };
 

@@ -1,6 +1,6 @@
 import MainPage from "../MainPage";
-import {connect} from 'react-redux';
-import {fetchDisciplines} from '../action/action-creator'
+import { connect } from 'react-redux';
+import { fetchDisciplines } from '../action/action-creator'
 
 const mapStateToProps = state => {
     return {
@@ -14,4 +14,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps) (MainPage)
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage)

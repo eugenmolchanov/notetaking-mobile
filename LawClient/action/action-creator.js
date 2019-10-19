@@ -1,4 +1,4 @@
-import {RECEIVE_DISCIPLINES, REQUEST_DISCIPLINES} from "../util/constants";
+import { RECEIVE_DISCIPLINES, REQUEST_DISCIPLINES } from "../util/constants";
 
 export const fetchDisciplines = () => {
     return dispatch => {
@@ -11,7 +11,6 @@ export const fetchDisciplines = () => {
         return fetch('http://192.168.0.101:8080/disciplines/free')
             .then(response => response.json())
             .then(data => {
-                debugger
                 dispatch({
                     type: RECEIVE_DISCIPLINES,
                     payload: data

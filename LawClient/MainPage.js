@@ -1,6 +1,5 @@
-import DisciplineList from "./container/disciplines-container";
 import React from "react";
-import {Text} from 'react-native';
+import DisciplineNavigator from './navigator/disciplines-navigator';
 
 class MainPage extends React.Component {
     constructor(props) {
@@ -12,10 +11,8 @@ class MainPage extends React.Component {
     }
 
     render() {
-        return this.props.isFetching ? (
-            <Text>Loading...</Text>
-        ) : (
-            <DisciplineList/>
+        return (
+            <DisciplineNavigator/>
         )
     }
 }

@@ -1,4 +1,4 @@
-import {RECEIVE_DISCIPLINES, REQUEST_DISCIPLINES} from "../util/constants";
+import { RECEIVE_DISCIPLINES, REQUEST_DISCIPLINES } from "../util/constants";
 
 const initialState = {
     disciplines: []
