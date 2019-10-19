@@ -2,6 +2,12 @@ import { SearchBar } from "react-native-elements";
 import React from "react";
 import { StyleSheet } from "react-native";
 
+const styles = StyleSheet.create({
+    whiteBackground: {
+        backgroundColor: 'white'
+    }
+});
+
 class HeaderSearchBar extends React.Component {
     constructor(props) {
         super(props);
@@ -9,12 +15,6 @@ class HeaderSearchBar extends React.Component {
             searchValue: ''
         }
     }
-
-    styles = StyleSheet.create({
-        whiteBackground: {
-            backgroundColor: 'white'
-        }
-    });
 
     _onType = (searchValue) => {
         this.setState({
