@@ -6,7 +6,7 @@ import HeaderTitle from "./HeaderTitle";
 class DisciplineList extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
-            headerTitle: <HeaderTitle onSearchValueChange={navigation.getParam('_onSearchValueChange')}/>
+            headerTitle: <HeaderTitle onSearchValueChange={navigation.getParam('onSearchValueChange')}/>
         }
     };
 

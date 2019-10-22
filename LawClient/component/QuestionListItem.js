@@ -15,10 +15,14 @@ const QuestionTitle = (props) => {
 };
 
 const QuestionListItem = (props) => {
+    const { navigation, question } = props;
     return (
         <ListItem
-            title={<QuestionTitle question={props.question}/>}
+            title={<QuestionTitle question={question}/>}
             chevron={rightChevron}
+            onPress={() => navigation.navigate('Question', {
+                question: question
+            })}
             bottomDivider>
         </ListItem>
     )
