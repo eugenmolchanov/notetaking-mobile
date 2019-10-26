@@ -2,11 +2,15 @@ import React from 'react'
 import QuestionListItem from "./QuestionListItem";
 import { ScrollView } from "react-native";
 import HeaderTitle from "./HeaderTitle";
+import Icon from "react-native-vector-icons/MaterialIcons";
+
+const backButtonIcon = <Icon name="chevron-left" size={35}/>;
 
 class QuestionList extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
-            headerTitle: <HeaderTitle onSearchValueChange={navigation.getParam('onQuestionListSearchValueChange')}/>
+            headerTitle: <HeaderTitle onSearchValueChange={navigation.getParam('onQuestionListSearchValueChange')}/>,
+            headerBackImage: backButtonIcon
         }
     };
 

@@ -1,9 +1,9 @@
 import { ListItem } from "react-native-elements";
 import React from "react";
 import { Text, View } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
-const rightChevron = <Icon name="chevron-right" size={15}/>;
+const rightChevron = <Icon name="navigate-next" size={25}/>;
 
 const QuestionTitle = (props) => {
     return (

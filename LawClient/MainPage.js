@@ -1,5 +1,5 @@
 import React from "react";
-import DisciplineNavigator from './navigator/disciplines-navigator';
+import AppContainer from './navigator/app-container';
 
 class MainPage extends React.Component {
     constructor(props) {
@@ -12,7 +12,7 @@ class MainPage extends React.Component {
 
     render() {
         return (
-            <DisciplineNavigator/>
+            <AppContainer/>
         )
     }
 }

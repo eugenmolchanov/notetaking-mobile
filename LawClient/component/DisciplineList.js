@@ -1,12 +1,23 @@
-import { ScrollView, Text } from "react-native";
+import { ScrollView, Text, TouchableHighlight } from "react-native";
 import React from "react";
 import DisciplineListItem from "./DisciplineListItem";
 import HeaderTitle from "./HeaderTitle";
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { DrawerActions } from "react-navigation-drawer";
+
+const Menu = (props) => {
+    return (
+        <TouchableHighlight onPress={() => props.navigation.dispatch(DrawerActions.openDrawer())}>
+            <Icon name="dehaze" size={25}/>
+        </TouchableHighlight>
+    )
+};
 
 class DisciplineList extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
-            headerTitle: <HeaderTitle onSearchValueChange={navigation.getParam('onSearchValueChange')}/>
+            headerTitle: <HeaderTitle onSearchValueChange={navigation.getParam('onSearchValueChange')}/>,
+            headerRight: <Menu navigation={navigation}/>
         }
     };
 

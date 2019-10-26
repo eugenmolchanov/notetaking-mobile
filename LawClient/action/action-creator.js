@@ -9,14 +9,14 @@ export const fetchDisciplines = () => {
 
         //ToDo handle error (redirect to empty state)
         try {
-            let response = await fetch('http://192.168.0.101:8080/disciplines/free');
+            let response = await fetch('http://192.168.0.103:8080/disciplines/access/free');
             let data = await response.json();
             dispatch({
                 type: RECEIVE_DISCIPLINES,
                 payload: data
             });
         } catch (e) {
-            console.log(e)
+            console.log(e.message)
         }
     }
 };
