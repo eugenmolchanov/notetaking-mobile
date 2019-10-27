@@ -3,6 +3,7 @@ import QuestionListItem from "./QuestionListItem";
 import { ScrollView } from "react-native";
 import HeaderTitle from "./HeaderTitle";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import Menu from "./Menu";
 
 const backButtonIcon = <Icon name="chevron-left" size={35}/>;
 
@@ -10,7 +11,8 @@ class QuestionList extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: <HeaderTitle onSearchValueChange={navigation.getParam('onQuestionListSearchValueChange')}/>,
-            headerBackImage: backButtonIcon
+            headerBackImage: backButtonIcon,
+            headerRight: <Menu navigation={navigation}/>
         }
     };
 
