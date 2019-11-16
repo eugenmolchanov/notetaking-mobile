@@ -1,9 +1,9 @@
 import React from 'react';
-import { ScrollView, Text } from "react-native";
-import HtmlView from "react-native-htmlview";
-import { StyleSheet } from "react-native";
+import { ScrollView, Text } from 'react-native';
+import HtmlView from 'react-native-htmlview';
+import { StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Menu from "./Menu";
+import Menu from './Menu';
 
 const backButtonIcon = <Icon name="close" size={25}/>;
 
@@ -12,30 +12,38 @@ const styles = StyleSheet.create({
         color: '#FD0A10',
         fontWeight: 'bold',
         fontSize: 18,
-        margin: 10
+        margin: 10,
     },
     strong: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     div: {
-        marginBottom: 5
-    }
+        marginBottom: 5,
+    },
 });
 
 class Question extends React.Component {
     static navigationOptions = ({ navigation }) => {
+        const params = {
+            getQuestion: Question._getQuestion,
+        };
+
         return {
             headerBackImage: backButtonIcon,
-            headerRight: <Menu navigation={navigation}/>
-        }
+            headerRight: <Menu navigation={navigation} params={params}/>,
+        };
     };
 
     constructor(props) {
         super(props);
     }
 
+    static _getQuestion = (navigation) => {
+        return navigation.getParam('question', {});
+    };
+
     render() {
-        const question = this.props.navigation.getParam('question', {});
+        const question = Question._getQuestion(this.props.navigation);
         return question.name ? (
             <ScrollView style={{padding: 15, marginBottom: 10}}>
                 <Text style={{fontWeight: 'bold'}}>Вопрос {question.number}. {question.name}</Text>
@@ -46,7 +54,7 @@ class Question extends React.Component {
             </ScrollView>
         ) : (
             <Text>empty state</Text>
-        )
+        );
     }
 }
 

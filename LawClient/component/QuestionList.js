@@ -1,9 +1,9 @@
-import React from 'react'
-import QuestionListItem from "./QuestionListItem";
-import { ScrollView } from "react-native";
-import HeaderTitle from "./HeaderTitle";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import Menu from "./Menu";
+import React from 'react';
+import QuestionListItem from './QuestionListItem';
+import { ScrollView } from 'react-native';
+import HeaderTitle from './HeaderTitle';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Menu from './Menu';
 
 const backButtonIcon = <Icon name="chevron-left" size={35}/>;
 
@@ -12,25 +12,25 @@ class QuestionList extends React.Component {
         return {
             headerTitle: <HeaderTitle onSearchValueChange={navigation.getParam('onQuestionListSearchValueChange')}/>,
             headerBackImage: backButtonIcon,
-            headerRight: <Menu navigation={navigation}/>
-        }
+            headerRight: <Menu navigation={navigation}/>,
+        };
     };
 
     constructor(props) {
         super(props);
         this.state = {
-            searchValue: ''
-        }
+            searchValue: '',
+        };
     }
 
     componentDidMount() {
-        this.props.navigation.setParams({ 'onQuestionListSearchValueChange': this._onSearchValueChange })
+        this.props.navigation.setParams({ 'onQuestionListSearchValueChange': this._onSearchValueChange });
     }
 
     _onSearchValueChange = (searchValue) => {
         this.setState({
-            searchValue
-        })
+            searchValue,
+        });
     };
 
     _isQuestionContainsSearchValue = (question) => {
@@ -45,14 +45,14 @@ class QuestionList extends React.Component {
                     true;
             })
             .map(question => {
-                return <QuestionListItem key={question.id} question={question} navigation={this.props.navigation}/>
+                return <QuestionListItem key={question.id} question={question} navigation={this.props.navigation}/>;
             });
 
         return (
             <ScrollView>
                 {questions}
             </ScrollView>
-        )
+        );
     }
 }
 

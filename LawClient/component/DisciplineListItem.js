@@ -1,7 +1,7 @@
-import React from "react";
-import { ListItem } from "react-native-elements";
+import React from 'react';
+import { ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Text } from "react-native";
+import { Text } from 'react-native';
 
 const rightChevron = <Icon name="navigate-next" size={25}/>;
 
@@ -14,12 +14,11 @@ const DisciplineListItem = (props) => {
             chevron={rightChevron}
             containerStyle={{ minHeight: 70 }}
             onPress={() => navigation.navigate('Questions', {
-                questions: discipline.questions
+                questions: discipline.questions,
             })}
             bottomDivider
-            leftElement={<Text>{discipline.abbreviation}</Text>}>
-        </ListItem>
-    )
+            leftElement={<Text>{discipline.abbreviation}</Text>} />
+    );
 };
 
 export default DisciplineListItem;

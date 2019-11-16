@@ -1,9 +1,9 @@
-import React from "react";
-import DrawerItem from "./DrawerItem";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import { View } from "react-native";
+import React from 'react';
+import DrawerItem from '../DrawerItem';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { View } from 'react-native';
 
-const contractionIcon = <Icon name={'text-format'} size={25}/>
+const contractionIcon = <Icon name={'text-format'} size={25}/>;
 
 const navigateToScreen = (route, navigation) => () => {
     navigation.navigate(route);
@@ -13,13 +13,13 @@ const navigateToScreen = (route, navigation) => () => {
 const DisciplinesDrawerItems = (props) => {
     return (
         <DrawerItem onPress={navigateToScreen('Disciplines', props.navigation)} name={'Дисциплины'}/>
-    )
+    );
 };
 
 const QuestionsDrawerItems = (props) => {
     return (
         <DrawerItem onPress={navigateToScreen('Questions', props.navigation)} name={'Вопросы'}/>
-    )
+    );
 };
 
 const QuestionDrawerItems = (props) => {
@@ -30,7 +30,17 @@ const QuestionDrawerItems = (props) => {
             <DrawerItem onPress={navigateToScreen('QuestionInBrief', props.navigation)} name={'Коротко по вопросу'}
                         leftIcon={contractionIcon}/>
         </View>
-    )
+    );
 };
 
-export { DisciplinesDrawerItems, QuestionsDrawerItems, QuestionDrawerItems };
+const ContractionsDrawerItems = (props) => {
+    return (
+        <View>
+            <DrawerItem onPress={navigateToScreen('Contractions', props.navigation)} name={'К изучаемому вопросу'}/>
+            <DrawerItem onPress={navigateToScreen('Contractions', props.navigation)} name={'К списку вопросов'}/>
+            <DrawerItem onPress={navigateToScreen('Contractions', props.navigation)} name={'К списку дисциплин'}/>
+        </View>
+    );
+};
+
+export { DisciplinesDrawerItems, QuestionsDrawerItems, QuestionDrawerItems, ContractionsDrawerItems };

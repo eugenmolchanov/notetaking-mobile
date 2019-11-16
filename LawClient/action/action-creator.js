@@ -1,22 +1,22 @@
-import { RECEIVE_DISCIPLINES, REQUEST_DISCIPLINES } from "../util/constants";
+import { RECEIVE_DISCIPLINES, REQUEST_DISCIPLINES } from '../util/constants';
 
 export const fetchDisciplines = () => {
     return async dispatch => {
         dispatch({
             type: REQUEST_DISCIPLINES,
-            payload: {}
+            payload: {},
         });
 
         //ToDo handle error (redirect to empty state)
         try {
-            let response = await fetch('http://192.168.0.103:8080/disciplines/access/free');
+            let response = await fetch('http://192.168.0.106:8080/disciplines/access/free');
             let data = await response.json();
             dispatch({
                 type: RECEIVE_DISCIPLINES,
-                payload: data
+                payload: data,
             });
         } catch (e) {
-            console.log(e.message)
+            console.log(e.message);
         }
-    }
+    };
 };

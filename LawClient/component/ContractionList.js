@@ -1,23 +1,28 @@
-import React from "react";
-import Menu from "./Menu";
-import { Text } from "react-native";
+import React from 'react';
+import { Text, View } from 'react-native';
+import { Header } from 'react-native-elements';
+import Menu from './Menu';
 
 class ContractionList extends React.Component {
-    static navigationOptions = ({ navigation }) => {
-        return {
-            headerRight: <Menu navigation={navigation}/>,
-            title: 'Сокращения'
-        }
-    };
-
     constructor(props) {
         super(props);
     }
 
     render() {
+        const { contractions } = this.props.navigation.getParam('question', []);
         return (
-            <Text onPress={() => this.props.navigation.goBack()}>Hey</Text>
-        )
+            <View>
+                <Header
+                    rightComponent={<Menu navigation={this.props.navigation}/>}
+                    centerComponent={{ text: 'Сокращения', style: {fontSize: 20} }}
+                    containerStyle={{
+                        paddingTop: 0,
+                        height: 60,
+                    }}
+                backgroundColor={'inherit'}/>
+                <Text>{contractions.length}</Text>
+            </View>
+        );
     }
 }
 

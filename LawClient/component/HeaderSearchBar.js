@@ -1,25 +1,25 @@
-import { SearchBar } from "react-native-elements";
-import React from "react";
-import { StyleSheet } from "react-native";
+import { SearchBar } from 'react-native-elements';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     whiteBackground: {
-        backgroundColor: 'white'
-    }
+        backgroundColor: 'white',
+    },
 });
 
 class HeaderSearchBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchValue: ''
-        }
+            searchValue: '',
+        };
     }
 
     _onType = (searchValue) => {
         this.setState({
-            searchValue
-        }, this.props.onValueChange(searchValue))
+            searchValue,
+        }, this.props.onValueChange(searchValue));
     };
 
     render() {
@@ -28,15 +28,14 @@ class HeaderSearchBar extends React.Component {
                 placeholder={'Поиск...'}
                 containerStyle={[
                     styles.whiteBackground,
-                    { flex: 1, borderBottomColor: 'white', borderTopColor: 'white' }
+                    { flex: 1, borderBottomColor: 'white', borderTopColor: 'white' },
                 ]}
                 inputContainerStyle={styles.whiteBackground}
                 inputStyle={styles.whiteBackground}
                 onChangeText={this._onType}
                 value={this.state.searchValue}
-                platform={'android'}>
-            </SearchBar>
-        )
+                platform={'android'} />
+        );
     }
 }
 

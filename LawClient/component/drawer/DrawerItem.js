@@ -1,5 +1,5 @@
-import React from "react";
-import { ListItem } from "react-native-elements";
+import React from 'react';
+import { ListItem } from 'react-native-elements';
 
 const DrawerItem = (props) => {
     return (
@@ -9,7 +9,7 @@ const DrawerItem = (props) => {
             bottomDivider
             leftIcon={props.leftIcon}
             style={{margin: 0}}/>
-    )
+    );
 };
 
 export default DrawerItem;

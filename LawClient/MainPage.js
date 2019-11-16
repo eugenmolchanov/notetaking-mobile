@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import AppContainer from './navigator/app-container';
 
 class MainPage extends React.Component {
@@ -13,7 +13,7 @@ class MainPage extends React.Component {
     render() {
         return (
             <AppContainer/>
-        )
+        );
     }
 }
 

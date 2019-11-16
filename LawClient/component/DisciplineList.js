@@ -1,32 +1,32 @@
-import { ScrollView, Text } from "react-native";
-import React from "react";
-import DisciplineListItem from "./DisciplineListItem";
-import HeaderTitle from "./HeaderTitle";
-import Menu from "./Menu";
+import { ScrollView, Text } from 'react-native';
+import React from 'react';
+import DisciplineListItem from './DisciplineListItem';
+import HeaderTitle from './HeaderTitle';
+import Menu from './Menu';
 
 class DisciplineList extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: <HeaderTitle onSearchValueChange={navigation.getParam('onSearchValueChange')}/>,
-            headerRight: <Menu navigation={navigation}/>
-        }
+            headerRight: <Menu navigation={navigation}/>,
+        };
     };
 
     constructor(props) {
         super(props);
         this.state = {
-            searchValue: ''
-        }
+            searchValue: '',
+        };
     }
 
     componentDidMount() {
-        this.props.navigation.setParams({ 'onSearchValueChange': this._onSearchValueChange })
+        this.props.navigation.setParams({ 'onSearchValueChange': this._onSearchValueChange });
     }
 
     _onSearchValueChange = (searchValue) => {
         this.setState({
-            searchValue
-        })
+            searchValue,
+        });
     };
 
     _isDisciplineContainsSearchValue = (discipline) => {
@@ -40,11 +40,11 @@ class DisciplineList extends React.Component {
             .filter(discipline => {
                 return this.state.searchValue ?
                     this._isDisciplineContainsSearchValue(discipline) :
-                    true
+                    true;
             })
             .map(discipline => {
                 return <DisciplineListItem key={discipline.id} discipline={discipline}
-                                           navigation={this.props.navigation}/>
+                                           navigation={this.props.navigation}/>;
             });
 
         return this.props.isFetching ? (
@@ -53,7 +53,7 @@ class DisciplineList extends React.Component {
             <ScrollView>
                 {disciplines}
             </ScrollView>
-        )
+        );
     }
 }
 
