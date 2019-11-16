@@ -1,4 +1,4 @@
-import DisciplineList from '../component/DisciplineList';
+import DisciplineList from '../component/navigator/stack/discipline/disciplines/DisciplineList';
 import {connect} from 'react-redux';
 
 const mapStateToProps = (state, ownProps) => {

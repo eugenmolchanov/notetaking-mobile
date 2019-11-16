@@ -1,9 +1,9 @@
 import React from 'react';
 import QuestionListItem from './QuestionListItem';
 import { ScrollView } from 'react-native';
-import HeaderTitle from './HeaderTitle';
+import HeaderTitle from '../HeaderTitle';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Menu from './Menu';
+import Menu from '../../../Menu';
 
 const backButtonIcon = <Icon name="chevron-left" size={35}/>;
 

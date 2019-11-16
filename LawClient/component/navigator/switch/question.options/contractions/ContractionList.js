@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Header } from 'react-native-elements';
-import Menu from './Menu';
+import Menu from '../../../Menu';
 import ContractionListItem from './ContractionListItem';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 

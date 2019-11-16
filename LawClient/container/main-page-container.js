@@ -1,4 +1,4 @@
-import MainPage from '../MainPage';
+import MainPage from '../component/MainPage';
 import { connect } from 'react-redux';
 import { fetchDisciplines } from '../action/action-creator';
 

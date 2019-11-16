@@ -1,5 +1,5 @@
 import React from 'react';
-import AppContainer from './navigator/app-container';
+import AppContainer from '../navigator/app-container';
 
 class MainPage extends React.Component {
     constructor(props) {

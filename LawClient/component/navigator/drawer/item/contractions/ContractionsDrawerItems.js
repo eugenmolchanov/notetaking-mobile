@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import DrawerItem from '../DrawerItem';
 import React from 'react';
-import { navigateToScreen } from './DrawerItemsUtils';
+import { navigateToScreen } from '../DrawerItemUtils';
 
 const ContractionsDrawerItems = (props) => {
     return (

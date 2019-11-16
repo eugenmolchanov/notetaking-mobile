@@ -3,7 +3,7 @@ import { ScrollView, Text } from 'react-native';
 import HtmlView from 'react-native-htmlview';
 import { StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Menu from './Menu';
+import Menu from '../../../Menu';
 
 const backButtonIcon = <Icon name="close" size={25}/>;
 

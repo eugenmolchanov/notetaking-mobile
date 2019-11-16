@@ -1,6 +1,6 @@
 import DrawerItem from '../DrawerItem';
 import React from 'react';
-import { navigateToScreen } from './DrawerItemsUtils';
+import { navigateToScreen } from '../DrawerItemUtils';
 
 const QuestionsDrawerItems = (props) => {
     return (

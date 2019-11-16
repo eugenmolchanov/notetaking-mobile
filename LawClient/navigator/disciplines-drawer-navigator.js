@@ -1,6 +1,6 @@
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import DisciplinesStackNavigator from './disciplines-stack-navigator';
-import Drawer from '../component/drawer/Drawer';
+import Drawer from '../component/navigator/drawer/Drawer';
 import QuestionOptionsSwitchNavigator from './question-options-switch-navigator';
 
 export default createDrawerNavigator({

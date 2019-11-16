@@ -1,8 +1,8 @@
 import { ScrollView, Text } from 'react-native';
 import React from 'react';
 import DisciplineListItem from './DisciplineListItem';
-import HeaderTitle from './HeaderTitle';
-import Menu from './Menu';
+import HeaderTitle from '../HeaderTitle';
+import Menu from '../../../Menu';
 
 class DisciplineList extends React.Component {
     static navigationOptions = ({ navigation }) => {

@@ -1,9 +1,9 @@
 import { SafeAreaView, ScrollView } from 'react-native';
 import React from 'react';
-import DisciplinesDrawerItems from './items/DisciplinesDrawerItems';
-import QuestionsDrawerItems from './items/QuestionsDrawerItems';
-import QuestionDrawerItems from './items/QuestionDrawerItems';
-import ContractionsDrawerItems from './items/ContractionsDrawerItems';
+import DisciplinesDrawerItems from './item/disciplines/DisciplinesDrawerItems';
+import QuestionsDrawerItems from './item/questions/QuestionsDrawerItems';
+import QuestionDrawerItems from './item/question/QuestionDrawerItems';
+import ContractionsDrawerItems from './item/contractions/ContractionsDrawerItems';
 
 const drawer = (props) => {
     const { navigation } = props;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native';
 
-const QuestionInBrief = (props) => {
+const QuestionShortContent = (props) => {
     const question = props.navigation.getParam('question', {});
 
     return (
@@ -9,4 +9,4 @@ const QuestionInBrief = (props) => {
     );
 };
 
-export default QuestionInBrief;
+export default QuestionShortContent;
