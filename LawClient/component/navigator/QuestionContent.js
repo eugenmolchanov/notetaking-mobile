@@ -17,8 +17,8 @@ const QuestionContent = (props) => {
 
 const styles = StyleSheet.create({
     questionWrapper: {
-        padding: 15,
-        marginBottom: 10,
+        marginLeft: 15,
+        paddingRight: 15,
     },
     questionHeader: {
         fontWeight: 'bold',
