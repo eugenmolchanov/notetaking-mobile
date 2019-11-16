@@ -7,7 +7,35 @@ import Menu from './Menu';
 
 const backButtonIcon = <Icon name="close" size={25}/>;
 
-const styles = StyleSheet.create({
+class Question extends React.Component {
+    static navigationOptions = ({ navigation }) => {
+        return {
+            headerBackImage: backButtonIcon,
+            headerRight: <Menu navigation={navigation}/>,
+        };
+    };
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        const question = this.props.navigation.getParam('question', {});
+        return question.name ? (
+            <ScrollView style={styles.questionWrapper}>
+                <Text style={styles.questionHeader}>Вопрос {question.number}. {question.name}</Text>
+                <HtmlView
+                    value={question.fullContent}
+                    stylesheet={questionContentStyles}
+                    addLineBreaks={false}/>
+            </ScrollView>
+        ) : (
+            <Text>empty state</Text>
+        );
+    }
+}
+
+const questionContentStyles = StyleSheet.create({
     h4: {
         color: '#FD0A10',
         fontWeight: 'bold',
@@ -22,40 +50,14 @@ const styles = StyleSheet.create({
     },
 });
 
-class Question extends React.Component {
-    static navigationOptions = ({ navigation }) => {
-        const params = {
-            getQuestion: Question._getQuestion,
-        };
-
-        return {
-            headerBackImage: backButtonIcon,
-            headerRight: <Menu navigation={navigation} params={params}/>,
-        };
-    };
-
-    constructor(props) {
-        super(props);
-    }
-
-    static _getQuestion = (navigation) => {
-        return navigation.getParam('question', {});
-    };
-
-    render() {
-        const question = Question._getQuestion(this.props.navigation);
-        return question.name ? (
-            <ScrollView style={{padding: 15, marginBottom: 10}}>
-                <Text style={{fontWeight: 'bold'}}>Вопрос {question.number}. {question.name}</Text>
-                <HtmlView
-                    value={question.fullContent}
-                    stylesheet={styles}
-                    addLineBreaks={false}/>
-            </ScrollView>
-        ) : (
-            <Text>empty state</Text>
-        );
-    }
-}
+const styles = StyleSheet.create({
+    questionWrapper: {
+        padding: 15,
+        marginBottom: 10,
+    },
+    questionHeader: {
+        fontWeight: 'bold',
+    },
+});
 
 export default Question;

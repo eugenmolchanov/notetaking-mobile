@@ -14,8 +14,8 @@ const drawer = (props) => {
             return <QuestionsDrawerItems navigation={navigation}/>;
         case 'Question':
             if (!navigationState.index) {
-                console.log(props);
-                return <QuestionDrawerItems navigation={navigation}/>;
+                const question = props.descriptors.Disciplines.state.routes[2].params.question;
+                return <QuestionDrawerItems navigation={navigation} contractions={question.contractions}/>;
             } else {
                 const currentPageOnSwitchNavigator = navigationState.routes[1].index;
                 const switchRouteName = navigationState.routes[1].routes[currentPageOnSwitchNavigator].routeName;

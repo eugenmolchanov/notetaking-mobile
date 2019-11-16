@@ -1,7 +1,7 @@
 import React from 'react';
 import { ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Text } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 
 const rightChevron = <Icon name="navigate-next" size={25}/>;
 
@@ -10,9 +10,9 @@ const DisciplineListItem = (props) => {
     return (
         <ListItem
             title={discipline.name}
-            titleStyle={{ textAlign: 'center' }}
+            titleStyle={styles.title}
             chevron={rightChevron}
-            containerStyle={{ minHeight: 70 }}
+            containerStyle={styles.itemContainer}
             onPress={() => navigation.navigate('Questions', {
                 questions: discipline.questions,
             })}
@@ -20,5 +20,14 @@ const DisciplineListItem = (props) => {
             leftElement={<Text>{discipline.abbreviation}</Text>} />
     );
 };
+
+const styles = StyleSheet.create({
+    itemContainer: {
+        minHeight: 70,
+    },
+    title: {
+        textAlign: 'center',
+    },
+});
 
 export default DisciplineListItem;

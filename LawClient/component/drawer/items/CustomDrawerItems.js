@@ -5,8 +5,8 @@ import { View } from 'react-native';
 
 const contractionIcon = <Icon name={'text-format'} size={25}/>;
 
-const navigateToScreen = (route, navigation) => () => {
-    navigation.navigate(route);
+const navigateToScreen = (route, navigation, props) => () => {
+    navigation.navigate(route, props);
     navigation.closeDrawer();
 };
 
@@ -25,7 +25,10 @@ const QuestionsDrawerItems = (props) => {
 const QuestionDrawerItems = (props) => {
     return (
         <View>
-            <DrawerItem onPress={navigateToScreen('Contractions', props.navigation)} name={'Используемые сокращения'}
+            <DrawerItem onPress={navigateToScreen('Contractions', props.navigation, {
+                contractions: props.contractions,
+            })}
+                        name={'Используемые сокращения'}
                         leftIcon={contractionIcon}/>
             <DrawerItem onPress={navigateToScreen('QuestionInBrief', props.navigation)} name={'Коротко по вопросу'}
                         leftIcon={contractionIcon}/>

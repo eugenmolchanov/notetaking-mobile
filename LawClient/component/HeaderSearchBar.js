@@ -2,12 +2,6 @@ import { SearchBar } from 'react-native-elements';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
-    whiteBackground: {
-        backgroundColor: 'white',
-    },
-});
-
 class HeaderSearchBar extends React.Component {
     constructor(props) {
         super(props);
@@ -28,7 +22,7 @@ class HeaderSearchBar extends React.Component {
                 placeholder={'Поиск...'}
                 containerStyle={[
                     styles.whiteBackground,
-                    { flex: 1, borderBottomColor: 'white', borderTopColor: 'white' },
+                    styles.searchBarContainer,
                 ]}
                 inputContainerStyle={styles.whiteBackground}
                 inputStyle={styles.whiteBackground}
@@ -38,5 +32,16 @@ class HeaderSearchBar extends React.Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    whiteBackground: {
+        backgroundColor: 'white',
+    },
+    searchBarContainer: {
+        flex: 1,
+        borderBottomColor: 'white',
+        borderTopColor: 'white',
+    },
+});
 
 export default HeaderSearchBar;

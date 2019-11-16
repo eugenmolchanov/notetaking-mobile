@@ -1,29 +1,32 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { Header } from 'react-native-elements';
 import Menu from './Menu';
+import ContractionListItem from './ContractionListItem';
 
-class ContractionList extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+const ContractionList = (props) => {
+    const contractions = props.navigation.getParam('contractions', [])
+        .map(contraction => <ContractionListItem key={contraction.id} contraction={contraction}/>);
 
-    render() {
-        const { contractions } = this.props.navigation.getParam('question', []);
-        return (
-            <View>
-                <Header
-                    rightComponent={<Menu navigation={this.props.navigation}/>}
-                    centerComponent={{ text: 'Сокращения', style: {fontSize: 20} }}
-                    containerStyle={{
-                        paddingTop: 0,
-                        height: 60,
-                    }}
+    return (
+        <View>
+            <Header
+                rightComponent={<Menu navigation={props.navigation}/>}
+                centerComponent={{ text: 'Сокращения', style: {fontSize: 20} }}
+                containerStyle={styles.headerContainer}
                 backgroundColor={'inherit'}/>
-                <Text>{contractions.length}</Text>
-            </View>
-        );
-    }
-}
+            <ScrollView>
+                {contractions}
+            </ScrollView>
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    headerContainer: {
+        paddingTop: 0,
+        height: 60,
+    },
+});
 
 export default ContractionList;
