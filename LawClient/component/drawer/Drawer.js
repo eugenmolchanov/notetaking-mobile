@@ -1,6 +1,9 @@
 import { SafeAreaView, ScrollView } from 'react-native';
 import React from 'react';
-import { DisciplinesDrawerItems, QuestionDrawerItems, QuestionsDrawerItems, ContractionsDrawerItems } from './items/CustomDrawerItems';
+import DisciplinesDrawerItems from './items/DisciplinesDrawerItems';
+import QuestionsDrawerItems from './items/QuestionsDrawerItems';
+import QuestionDrawerItems from './items/QuestionDrawerItems';
+import ContractionsDrawerItems from './items/ContractionsDrawerItems';
 
 const drawer = (props) => {
     const { navigation } = props;
@@ -15,7 +18,7 @@ const drawer = (props) => {
         case 'Question':
             if (!navigationState.index) {
                 const question = props.descriptors.Disciplines.state.routes[2].params.question;
-                return <QuestionDrawerItems navigation={navigation} contractions={question.contractions}/>;
+                return <QuestionDrawerItems navigation={navigation} question={question}/>;
             } else {
                 const currentPageOnSwitchNavigator = navigationState.routes[1].index;
                 const switchRouteName = navigationState.routes[1].routes[currentPageOnSwitchNavigator].routeName;
