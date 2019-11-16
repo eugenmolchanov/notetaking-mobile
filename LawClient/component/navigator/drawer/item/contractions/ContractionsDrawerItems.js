@@ -6,9 +6,10 @@ import { navigateToScreen } from '../DrawerItemUtils';
 const ContractionsDrawerItems = (props) => {
     return (
         <View>
-            <DrawerItem onPress={navigateToScreen('Contractions', props.navigation)} name={'К изучаемому вопросу'}/>
-            <DrawerItem onPress={navigateToScreen('Contractions', props.navigation)} name={'К списку вопросов'}/>
-            <DrawerItem onPress={navigateToScreen('Contractions', props.navigation)} name={'К списку дисциплин'}/>
+            <DrawerItem onPress={navigateToScreen('Question', props.navigation)} name={'К изучаемому вопросу'}/>
+            <DrawerItem onPress={navigateToScreen('Questions', props.navigation)} name={'К списку вопросов'}/>
+            <DrawerItem onPress={navigateToScreen('Disciplines', props.navigation)} name={'К списку дисциплин'}/>
+            <DrawerItem onPress={navigateToScreen('Disciplines', props.navigation)} name={'О данной функции приложения'}/>
         </View>
     );
 };

@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { navigateToScreen } from '../DrawerItemUtils';
 
 const contractionIcon = <Icon name={'text-format'} size={25}/>;
-const questionInBriefIcon = <Icon name={'description'} size={25}/>;
+const questionShortContentIcon = <Icon name={'description'} size={25}/>;
 
 const QuestionDrawerItems = (props) => {
     const { question } = props;
@@ -16,10 +16,10 @@ const QuestionDrawerItems = (props) => {
             })}
                         name={'Используемые сокращения'}
                         leftIcon={contractionIcon}/>
-            <DrawerItem onPress={navigateToScreen('QuestionInBrief', props.navigation, {
+            <DrawerItem onPress={navigateToScreen('QuestionShortContent', props.navigation, {
                 question: question,
             })}         name={'Коротко по вопросу'}
-                        leftIcon={questionInBriefIcon}/>
+                        leftIcon={questionShortContentIcon}/>
         </View>
     );
 };

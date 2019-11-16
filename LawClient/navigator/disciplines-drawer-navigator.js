@@ -4,10 +4,10 @@ import Drawer from '../component/navigator/drawer/Drawer';
 import QuestionOptionsSwitchNavigator from './question-options-switch-navigator';
 
 export default createDrawerNavigator({
-    Disciplines: DisciplinesStackNavigator,
+    DisciplinesStack: DisciplinesStackNavigator,
     QuestionSwitchOptions: QuestionOptionsSwitchNavigator,
 }, {
-    initialRouteName: 'Disciplines',
+    initialRouteName: 'DisciplinesStack',
     drawerPosition: 'right',
     drawerWidth: 300,
     contentComponent: Drawer,
