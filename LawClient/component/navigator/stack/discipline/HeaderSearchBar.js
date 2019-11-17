@@ -1,6 +1,7 @@
 import { SearchBar } from 'react-native-elements';
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import * as PropTypes from 'prop-types';
 
 class HeaderSearchBar extends React.Component {
     constructor(props) {
@@ -43,5 +44,9 @@ const styles = StyleSheet.create({
         borderTopColor: 'white',
     },
 });
+
+HeaderSearchBar.propTypes = {
+    onValueChange: PropTypes.func,
+};
 
 export default HeaderSearchBar;

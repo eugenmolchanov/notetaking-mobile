@@ -3,6 +3,7 @@ import DrawerItem from '../DrawerItem';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { navigateToScreen } from '../DrawerItemUtils';
+import * as PropTypes from 'prop-types';
 
 const contractionIcon = <Icon name={'text-format'} size={25}/>;
 const questionShortContentIcon = <Icon name={'description'} size={25}/>;
@@ -22,6 +23,11 @@ const QuestionDrawerItems = (props) => {
                         leftIcon={questionShortContentIcon}/>
         </View>
     );
+};
+
+QuestionDrawerItems.propTypes = {
+    navigation: PropTypes.object,
+    contractions: PropTypes.array,
 };
 
 export default QuestionDrawerItems;

@@ -3,6 +3,7 @@ import DrawerItem from '../DrawerItem';
 import React from 'react';
 import { navigateToScreen } from '../DrawerItemUtils';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import * as PropTypes from 'prop-types';
 
 const questionIcon = <Icon name={'help-outline'} size={25}/>;
 const questionsIcon = <Icon name={'format-list-numbered'} size={25}/>;
@@ -23,6 +24,10 @@ const ContractionsDrawerItems = (props) => {
                         leftIcon={functionIcon}/>
         </View>
     );
+};
+
+ContractionsDrawerItems.propTypes = {
+    navigation: PropTypes.object,
 };
 
 export default ContractionsDrawerItems;

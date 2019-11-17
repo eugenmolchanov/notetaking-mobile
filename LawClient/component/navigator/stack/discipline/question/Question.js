@@ -2,6 +2,7 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Menu from '../../../Menu';
 import QuestionContent from '../../../QuestionContent';
+import * as PropTypes from 'prop-types';
 
 const backButtonIcon = <Icon name="close" size={25}/>;
 
@@ -24,5 +25,9 @@ class Question extends React.Component {
         );
     }
 }
+
+Question.propTypes = {
+    navigation: PropTypes.object,
+};
 
 export default Question;

@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.21",
     "@emotion/native": "^10.0.14",
+    "prop-types": "^15.7.2",
     "react": "16.9.0",
     "react-native": "0.61.2",
     "react-native-elements": "^1.2.6",

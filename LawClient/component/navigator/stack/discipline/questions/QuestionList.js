@@ -4,6 +4,7 @@ import { ScrollView } from 'react-native';
 import HeaderTitle from '../HeaderTitle';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Menu from '../../../Menu';
+import * as PropTypes from 'prop-types';
 
 const backButtonIcon = <Icon name="chevron-left" size={35}/>;
 
@@ -55,5 +56,9 @@ class QuestionList extends React.Component {
         );
     }
 }
+
+QuestionList.propTypes = {
+    navigation: PropTypes.object,
+};
 
 export default QuestionList;

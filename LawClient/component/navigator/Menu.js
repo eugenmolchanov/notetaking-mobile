@@ -1,6 +1,7 @@
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import React from 'react';
+import * as PropTypes from 'prop-types';
 
 const Menu = (props) => {
     return (
@@ -17,5 +18,9 @@ const styles = StyleSheet.create({
        marginRight: 15,
    },
 });
+
+Menu.propTypes = {
+    navigation: PropTypes.object,
+};
 
 export default Menu;

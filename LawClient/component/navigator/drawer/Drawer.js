@@ -4,6 +4,7 @@ import DisciplinesDrawerItems from './item/disciplines/DisciplinesDrawerItems';
 import QuestionsDrawerItems from './item/questions/QuestionsDrawerItems';
 import QuestionDrawerItems from './item/question/QuestionDrawerItems';
 import ContractionsDrawerItems from './item/contractions/ContractionsDrawerItems';
+import * as PropTypes from 'prop-types';
 
 const drawer = (props) => {
     const { navigation } = props;
@@ -40,6 +41,10 @@ const Drawer = (props) => {
             </SafeAreaView>
         </ScrollView>
     );
+};
+
+Drawer.propTypes = {
+    navigation: PropTypes.object,
 };
 
 export default Drawer;

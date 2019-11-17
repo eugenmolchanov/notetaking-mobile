@@ -2,14 +2,16 @@ import { ListItem } from 'react-native-elements';
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import * as PropTypes from 'prop-types';
 
 const rightChevron = <Icon name="navigate-next" size={25}/>;
 
 const QuestionTitle = (props) => {
+    const { question } = props;
     return (
         <View>
-            <Text style={styles.questionNumber}>Вопрос {props.question.number}</Text>
-            <Text>{props.question.name}</Text>
+            <Text style={styles.questionNumber}>Вопрос {question.number}</Text>
+            <Text>{question.name}</Text>
         </View>
     );
 };
@@ -32,5 +34,17 @@ const styles = StyleSheet.create({
        fontWeight: 'bold',
    },
 });
+
+QuestionListItem.propTypes = {
+    navigation: PropTypes.object,
+    question: PropTypes.object,
+};
+
+QuestionTitle.propTypes = {
+    question: PropTypes.shape({
+        number: PropTypes.number,
+        name: PropTypes.string,
+    }),
+};
 
 export default QuestionListItem;

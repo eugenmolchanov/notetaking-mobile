@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, View } from 'react-native';
 import ContractionListItem from './ContractionListItem';
 import OptionHeader from '../OptionHeader';
+import * as PropTypes from 'prop-types';
 
 const ContractionList = (props) => {
     const contractions = props.navigation.getParam('contractions', [])
@@ -15,6 +16,10 @@ const ContractionList = (props) => {
             </ScrollView>
         </View>
     );
+};
+
+ContractionList.propTypes = {
+    navigation: PropTypes.object,
 };
 
 export default ContractionList;

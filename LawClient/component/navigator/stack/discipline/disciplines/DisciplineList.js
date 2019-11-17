@@ -3,6 +3,7 @@ import React from 'react';
 import DisciplineListItem from './DisciplineListItem';
 import HeaderTitle from '../HeaderTitle';
 import Menu from '../../../Menu';
+import * as PropTypes from 'prop-types';
 
 class DisciplineList extends React.Component {
     static navigationOptions = ({ navigation }) => {
@@ -56,5 +57,11 @@ class DisciplineList extends React.Component {
         );
     }
 }
+
+DisciplineList.propTypes = {
+    disciplines: PropTypes.array,
+    isFetching: PropTypes.bool,
+    navigation: PropTypes.object,
+};
 
 export default DisciplineList;

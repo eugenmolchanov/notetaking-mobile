@@ -3,6 +3,7 @@ import { Header } from 'react-native-elements';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { StyleSheet, TouchableOpacity } from 'react-native';
+import * as PropTypes from 'prop-types';
 
 const ClosePage = (props) => {
     return (
@@ -32,5 +33,14 @@ const styles = StyleSheet.create({
         height: 60,
     },
 });
+
+OptionHeader.propTypes = {
+    navigation: PropTypes.object,
+    title: PropTypes.string,
+};
+
+ClosePage.propTypes = {
+    navigation: PropTypes.object,
+};
 
 export default OptionHeader;

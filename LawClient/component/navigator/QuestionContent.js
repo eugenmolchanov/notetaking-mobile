@@ -1,6 +1,7 @@
 import { ScrollView, StyleSheet, Text } from 'react-native';
 import HtmlView from 'react-native-htmlview';
 import React from 'react';
+import * as PropTypes from 'prop-types';
 
 const QuestionContent = (props) => {
     const { question, content } = props;
@@ -39,5 +40,13 @@ const questionContentStyles = StyleSheet.create({
         marginBottom: 5,
     },
 });
+
+QuestionContent.propTypes = {
+    question: PropTypes.shape({
+        number: PropTypes.number,
+        name: PropTypes.string,
+    }),
+    content: PropTypes.string,
+};
 
 export default QuestionContent;
