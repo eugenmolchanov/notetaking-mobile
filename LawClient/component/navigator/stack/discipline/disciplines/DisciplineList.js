@@ -1,4 +1,4 @@
-import { ScrollView, Text } from 'react-native';
+import { ActivityIndicator, ScrollView, View, StyleSheet } from 'react-native';
 import React from 'react';
 import DisciplineListItem from './DisciplineListItem';
 import HeaderTitle from '../HeaderTitle';
@@ -49,7 +49,9 @@ class DisciplineList extends React.Component {
             });
 
         return this.props.isFetching ? (
-            <Text>Loading...</Text>
+            <View style={styles.spinnerContainer}>
+                <ActivityIndicator size={'large'}/>
+            </View>
         ) : (
             <ScrollView>
                 {disciplines}
@@ -63,5 +65,13 @@ DisciplineList.propTypes = {
     isFetching: PropTypes.bool,
     navigation: PropTypes.object,
 };
+
+const styles = StyleSheet.create({
+    spinnerContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        flexDirection: 'column',
+    },
+});
 
 export default DisciplineList;

@@ -2,7 +2,6 @@ import React from 'react';
 import { ListItem } from 'react-native-elements';
 import { StyleSheet } from 'react-native';
 import * as PropTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const DrawerItem = (props) => {
     return (
@@ -24,7 +23,7 @@ const styles = StyleSheet.create({
 DrawerItem.propTypes = {
     name: PropTypes.string,
     onPress: PropTypes.func,
-    leftIcon: PropTypes.instanceOf(Icon),
+    leftIcon: PropTypes.object,
 };
 
 export default DrawerItem;
