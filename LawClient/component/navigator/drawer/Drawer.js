@@ -3,7 +3,7 @@ import React from 'react';
 import DisciplinesDrawerItems from './item/disciplines/DisciplinesDrawerItems';
 import QuestionsDrawerItems from './item/questions/QuestionsDrawerItems';
 import QuestionDrawerItems from './item/question/QuestionDrawerItems';
-import ContractionsDrawerItems from './item/contractions/ContractionsDrawerItems';
+import QuestionOptionDrawerItems from './item/question/options/QuestionOptionDrawerItems';
 import * as PropTypes from 'prop-types';
 
 const drawer = (props) => {
@@ -25,9 +25,9 @@ const drawer = (props) => {
                 const switchRouteName = navigationState.routes[1].routes[currentPageOnSwitchNavigator].routeName;
                 switch (switchRouteName) {
                     case 'Contractions':
-                        return <ContractionsDrawerItems navigation={navigation}/>;
+                        return <QuestionOptionDrawerItems navigation={navigation}/>;
                     case 'QuestionShortContent':
-
+                        return <QuestionOptionDrawerItems navigation={navigation}/>;
                 }
             }
     }

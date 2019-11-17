@@ -8,7 +8,7 @@ const questionsIcon = <Icon name={'format-list-numbered'} size={25}/>;
 
 const QuestionsDrawerItems = (props) => {
     return (
-        <DrawerItem onPress={navigateToScreen('Questions', props.navigation)} name={'Вопросы'}
+        <DrawerItem onPress={navigateToScreen('Questions', props.navigation)} name={'К списку вопросов'}
                 leftIcon={questionsIcon}/>
     );
 };

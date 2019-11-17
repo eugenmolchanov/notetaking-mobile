@@ -1,7 +1,7 @@
 import { View } from 'react-native';
-import DrawerItem from '../DrawerItem';
+import DrawerItem from '../../DrawerItem';
 import React from 'react';
-import { navigateToScreen } from '../DrawerItemUtils';
+import { navigateToScreen } from '../../DrawerItemUtils';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as PropTypes from 'prop-types';
 
@@ -10,7 +10,7 @@ const questionsIcon = <Icon name={'format-list-numbered'} size={25}/>;
 const disciplinesIcon = <Icon name={'format-list-bulleted'} size={25}/>;
 const functionIcon = <Icon name={'announcement'} size={25}/>;
 
-const ContractionsDrawerItems = (props) => {
+const QuestionOptionDrawerItems = (props) => {
     return (
         <View>
             <DrawerItem onPress={navigateToScreen('Question', props.navigation)} name={'К изучаемому вопросу'}
@@ -26,8 +26,8 @@ const ContractionsDrawerItems = (props) => {
     );
 };
 
-ContractionsDrawerItems.propTypes = {
+QuestionOptionDrawerItems.propTypes = {
     navigation: PropTypes.object,
 };
 
-export default ContractionsDrawerItems;
+export default QuestionOptionDrawerItems;
