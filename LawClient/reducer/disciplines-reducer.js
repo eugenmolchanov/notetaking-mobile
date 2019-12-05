@@ -1,4 +1,4 @@
-import { RECEIVE_DISCIPLINES, REQUEST_DISCIPLINES } from '../util/constants';
+import { RECEIVE_DISCIPLINES, REQUEST_ITEMS } from '../util/constants';
 
 const initialState = {
     disciplines: [],
@@ -6,7 +6,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case REQUEST_DISCIPLINES:
+        case REQUEST_ITEMS:
             return Object.assign({
                 isFetching: true,
             }, state);

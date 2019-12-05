@@ -13,9 +13,14 @@ const DisciplineListItem = (props) => {
             titleStyle={styles.title}
             chevron={rightChevron}
             containerStyle={styles.itemContainer}
-            onPress={() => navigation.navigate('Questions', {
-                questions: discipline.questions,
-            })}
+            onPress={() => {
+                props.openDiscipline(discipline.id);
+
+                navigation.navigate('Questions', {
+                    disciplineId: discipline.id,
+                    questions: discipline.questions,
+                })
+            }}
             bottomDivider
             leftElement={<Text>{discipline.abbreviation}</Text>} />
     );
