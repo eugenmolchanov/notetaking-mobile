@@ -4,7 +4,7 @@ import OptionHeader from '../OptionHeader';
 import QuestionContent from '../../../QuestionContent';
 
 const QuestionShortContent = (props) => {
-    const question = props.navigation.getParam('question', {});
+    const { question } = props;
 
     return (
         <View>

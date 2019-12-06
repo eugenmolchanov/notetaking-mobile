@@ -1,23 +1,30 @@
-import { RECEIVE_DISCIPLINES, RECEIVE_QUESTIONS, REQUEST_ITEMS } from '../util/constants';
+import {
+    RECEIVE_DISCIPLINES, RECEIVE_QUESTION,
+    RECEIVE_QUESTIONS,
+    REQUEST_DISCIPLINES,
+    REQUEST_QUESTION,
+    REQUEST_QUESTIONS
+} from '../util/constants';
 import Realm from 'realm';
 import LawSchemas from '../database.schema/LawSchemas';
 
-const requestItems = (dispatch) => {
+const requestItems = (items, dispatch) => {
     dispatch({
-        type: REQUEST_ITEMS,
+        type: items,
         payload: {},
     });
 };
 
 export const fetchDisciplines = () => {
     return async dispatch => {
-        requestItems(dispatch);
+        requestItems(REQUEST_DISCIPLINES, dispatch);
 
         //ToDo handle error (redirect to empty state)
         try {
             let realm = await Realm.open({ schema: LawSchemas });
+            Realm.deleteFile({ schema: LawSchemas });
             if (!Realm.schemaVersion(Realm.defaultPath)) {
-                let response = await fetch('http://192.168.99.112:8080/disciplines/access/free');
+                let response = await fetch('http://192.168.100.7:8080/disciplines/access/free');
 
                 let data = await response.json();
                 try {
@@ -30,6 +37,18 @@ export const fetchDisciplines = () => {
                                     freeAccess: discipline.isFree,
                                 },
                                 Realm.UpdateMode.All);
+
+                            discipline.questions.forEach(question => {
+                                realm.create('Question', {
+                                        id: question.id,
+                                        name: question.name,
+                                        number: question.number,
+                                        fullContent: question.fullContent,
+                                        shortContent: question.shortContent,
+                                        disciplineId: discipline.id,
+                                    },
+                                    Realm.UpdateMode.All);
+                            })
                         });
                     });
                 } catch (e) {
@@ -47,13 +66,27 @@ export const fetchDisciplines = () => {
     };
 };
 
-export const openDiscipline = (disciplineId) => {
+export const openDiscipline = (id, navigation) => {
     return async dispatch => {
-        requestItems(dispatch);
-        let realm = Realm.open({schema: LawSchemas});
+        requestItems(REQUEST_QUESTIONS, dispatch);
+        navigation.navigate('Questions');
+        let realm = await Realm.open({ schema: LawSchemas });
         dispatch({
             type: RECEIVE_QUESTIONS,
-            payload: await realm.objects('Question').filtered(`discipline.id == ${disciplineId}`),
+            payload: await realm.objects('Question').filtered(`disciplineId == ${id}`),
+        })
+    }
+};
+
+export const openQuestion = (id, navigation) => {
+    return async dispatch => {
+        requestItems(REQUEST_QUESTION, dispatch);
+        navigation.navigate('Question');
+        let realm = await Realm.open({ schema: LawSchemas });
+        let questions = await realm.objects('Question').filtered(`id == ${id}`);
+        dispatch({
+            type: RECEIVE_QUESTION,
+            payload: questions.length ? questions[0] : null,
         })
     }
 };

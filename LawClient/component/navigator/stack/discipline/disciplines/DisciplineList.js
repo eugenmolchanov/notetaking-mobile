@@ -44,7 +44,6 @@ class DisciplineList extends React.Component {
             })
             .map(discipline => {
                 return <DisciplineListItem key={discipline.id} discipline={discipline}
-                                           navigation={this.props.navigation}
                                            openDiscipline={this.props.openDiscipline}/>;
             });
 

@@ -6,7 +6,6 @@ const DisciplineSchema = {
         name: 'string',
         abbreviation: 'string',
         freeAccess: 'bool',
-        // questions: {type: 'linkingObjects', objectType: 'Question', property: 'discipline'},
     },
 };
 
@@ -19,8 +18,7 @@ const QuestionSchema = {
         number: 'int',
         fullContent: 'string',
         shortContent: 'string',
-        discipline: 'Discipline',
-        contractions: 'Contraction[]',
+        disciplineId: 'int',
     },
 };
 
@@ -34,13 +32,13 @@ const ContractionSchema = {
     },
 };
 
-// const QuestionContractionSchema = {
-//     name: 'QuestionContraction',
-//     properties: {
-//         questionId: {type: 'linkingObjects', objectType: 'Question', property: 'id'},
-//         contractionId: ,
-//     },
-// };
+const QuestionContractionSchema = {
+    name: 'QuestionContraction',
+    properties: {
+        questionId: 'int',
+        contractionId: 'int',
+    },
+};
 
 const schemas = [DisciplineSchema, QuestionSchema, ContractionSchema];
 

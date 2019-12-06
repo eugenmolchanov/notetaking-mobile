@@ -1,6 +1,6 @@
 import { createSwitchNavigator } from 'react-navigation';
-import ContractionListScreen from '../component/navigator/switch/question.options/contractions/ContractionList';
-import QuestionShortContentScreen from '../component/navigator/switch/question.options/short.content/QuestionShortContent';
+import ContractionListScreen from '../container/contractions-container';
+import QuestionShortContentScreen from '../container/question-short-content-container';
 
 const QuestionOptionsSwitchNavigator = createSwitchNavigator({
     Contractions: ContractionListScreen,

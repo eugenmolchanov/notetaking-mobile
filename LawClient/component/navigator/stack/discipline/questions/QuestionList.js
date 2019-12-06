@@ -39,13 +39,14 @@ class QuestionList extends React.Component {
     };
 
     render() {
-        const questions = this.props.navigation.getParam('questions', [])
+        const questions = this.props.questions
             .filter(question => {
                 return this.state.searchValue ? this._isQuestionContainsSearchValue(question) :
                     true;
             })
             .map(question => {
-                return <QuestionListItem key={question.id} question={question} navigation={this.props.navigation}/>;
+                return <QuestionListItem key={question.id} question={question}
+                                         openQuestion={this.props.openQuestion}/>;
             });
 
         return (

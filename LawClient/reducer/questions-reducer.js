@@ -1,20 +1,21 @@
-import { RECEIVE_DISCIPLINES, REQUEST_DISCIPLINES } from '../util/constants';
+import { RECEIVE_QUESTIONS, REQUEST_QUESTIONS } from '../util/constants';
 
 const initialState = {
-    disciplines: [],
+    questions: [],
 };
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case REQUEST_DISCIPLINES:
+        case REQUEST_QUESTIONS:
             return Object.assign({
                 isFetching: true,
+                questions: []
             }, state);
-        case RECEIVE_DISCIPLINES:
+        case RECEIVE_QUESTIONS:
             return Object.assign({
                 isFetching: false,
             }, {
-                disciplines: action.payload,
+                questions: action.payload,
             });
         default:
             return state;

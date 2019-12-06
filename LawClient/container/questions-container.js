@@ -1,12 +1,19 @@
 import QuestionList from "../component/navigator/stack/discipline/questions/QuestionList";
 import { connect } from "react-redux";
+import { openQuestion } from "../action/action-creator";
 
 const mapStateToProps = (state, ownProps) => {
-    const disciplineId = this.props.navigation.getParam('disciplineId', []);
-
     return {
-
+        questions: state.questions.questions,
+        isFetching: state.questions.isFetching,
+        navigation: ownProps.navigation,
     }
 };
 
-export default connect(mapStateToProps)(QuestionList);
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        openQuestion: id => dispatch(openQuestion(id, ownProps.navigation)),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (QuestionList);

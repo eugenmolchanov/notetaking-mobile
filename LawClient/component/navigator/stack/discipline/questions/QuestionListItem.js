@@ -15,14 +15,12 @@ const QuestionTitle = (props) => {
 };
 
 const QuestionListItem = (props) => {
-    const { navigation, question } = props;
+    const { question, openQuestion } = props;
     return (
         <ListItem
             title={<QuestionTitle question={question}/>}
             chevron={rightChevron}
-            onPress={() => navigation.navigate('Question', {
-                question: question,
-            })}
+            onPress={() => openQuestion(question.id)}
             bottomDivider />
     );
 };

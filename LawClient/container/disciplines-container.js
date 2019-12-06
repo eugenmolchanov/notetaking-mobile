@@ -4,15 +4,15 @@ import { openDiscipline } from "../action/action-creator";
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        disciplines: state.disciplines,
-        isFetching: state.isFetching,
+        disciplines: state.disciplines.disciplines,
+        isFetching: state.disciplines.isFetching,
         navigation: ownProps.navigation,
     };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        openDiscipline: disciplineId => dispatch(openDiscipline(disciplineId)),
+        openDiscipline: id => dispatch(openDiscipline(id, ownProps.navigation)),
     }
 };
 

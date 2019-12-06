@@ -6,7 +6,7 @@ import { Text, StyleSheet } from 'react-native';
 const rightChevron = <Icon name="navigate-next" size={25}/>;
 
 const DisciplineListItem = (props) => {
-    const { discipline, navigation } = props;
+    const { discipline, openDiscipline } = props;
     return (
         <ListItem
             title={discipline.name}
@@ -14,12 +14,7 @@ const DisciplineListItem = (props) => {
             chevron={rightChevron}
             containerStyle={styles.itemContainer}
             onPress={() => {
-                props.openDiscipline(discipline.id);
-
-                navigation.navigate('Questions', {
-                    disciplineId: discipline.id,
-                    questions: discipline.questions,
-                })
+                openDiscipline(discipline.id);
             }}
             bottomDivider
             leftElement={<Text>{discipline.abbreviation}</Text>} />

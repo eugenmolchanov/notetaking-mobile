@@ -4,7 +4,7 @@ import ContractionListItem from './ContractionListItem';
 import OptionHeader from '../OptionHeader';
 
 const ContractionList = (props) => {
-    const contractions = props.navigation.getParam('contractions', [])
+    const contractions = props.contractions
         .map(contraction => <ContractionListItem key={contraction.id} contraction={contraction}/>);
 
     return (

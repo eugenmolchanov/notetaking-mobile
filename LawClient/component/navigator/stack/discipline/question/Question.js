@@ -18,7 +18,7 @@ class Question extends React.Component {
     }
 
     render() {
-        const question = this.props.navigation.getParam('question', {});
+        const { question } = this.props;
         return (
             <QuestionContent question={question} content={question.fullContent}/>
         );
