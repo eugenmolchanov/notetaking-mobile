@@ -19,6 +19,7 @@ const QuestionSchema = {
         fullContent: 'string',
         shortContent: 'string',
         disciplineId: 'int',
+        contractions: 'Contraction[]',
     },
 };
 
@@ -29,14 +30,6 @@ const ContractionSchema = {
         id: 'int',
         name: 'string',
         description: 'string',
-    },
-};
-
-const QuestionContractionSchema = {
-    name: 'QuestionContraction',
-    properties: {
-        questionId: 'int',
-        contractionId: 'int',
     },
 };
 

@@ -2,7 +2,6 @@ import { RECEIVE_QUESTION, REQUEST_QUESTION } from '../util/constants';
 
 const initialState = {
     question: {},
-    contractions: [],
 };
 
 export default function (state = initialState, action) {
@@ -11,7 +10,6 @@ export default function (state = initialState, action) {
             return Object.assign({
                 isFetching: true,
                 question: {},
-                contractions: [],
             });
         case RECEIVE_QUESTION:
             return Object.assign({

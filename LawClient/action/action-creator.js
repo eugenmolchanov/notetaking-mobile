@@ -38,7 +38,17 @@ export const fetchDisciplines = () => {
                                 },
                                 Realm.UpdateMode.All);
 
+
                             discipline.questions.forEach(question => {
+                                question.contractions.forEach(contraction => {
+                                    realm.create('Contraction', {
+                                            id: contraction.id,
+                                            name: contraction.name,
+                                            description: contraction.description,
+                                        },
+                                        Realm.UpdateMode.All)
+                                });
+
                                 realm.create('Question', {
                                         id: question.id,
                                         name: question.name,
@@ -46,6 +56,7 @@ export const fetchDisciplines = () => {
                                         fullContent: question.fullContent,
                                         shortContent: question.shortContent,
                                         disciplineId: discipline.id,
+                                        contractions: question.contractions,
                                     },
                                     Realm.UpdateMode.All);
                             })
