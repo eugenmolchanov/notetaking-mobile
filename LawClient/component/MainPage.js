@@ -19,7 +19,7 @@ class MainPage extends React.Component {
 }
 
 MainPage.propTypes = {
-    fetchDisciplines: PropTypes.func,
+    fetchDisciplines: PropTypes.func.isRequired,
 };
 
 export default MainPage;

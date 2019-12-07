@@ -26,9 +26,10 @@ const styles = StyleSheet.create({
 
 ContractionListItem.propTypes = {
     contraction: PropTypes.shape({
-        description: PropTypes.string,
-        name: PropTypes.string,
-    }),
+        id: PropTypes.number.isRequired,
+        description: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+    }).isRequired,
 };
 
 export default ContractionListItem;

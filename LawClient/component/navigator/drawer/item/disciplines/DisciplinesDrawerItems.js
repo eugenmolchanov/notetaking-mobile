@@ -6,7 +6,6 @@ import * as PropTypes from 'prop-types';
 
 const disciplinesIcon = <Icon name={'format-list-bulleted'} size={25}/>;
 
-
 const DisciplinesDrawerItems = (props) => {
     return (
         <DrawerItem onPress={navigateToScreen('Disciplines', props.navigation)} name={'К списку дисциплин'}
@@ -15,7 +14,7 @@ const DisciplinesDrawerItems = (props) => {
 };
 
 DisciplinesDrawerItems.propTypes = {
-    navigation: PropTypes.object,
+    navigation: PropTypes.object.isRequired,
 };
 
 export default DisciplinesDrawerItems;

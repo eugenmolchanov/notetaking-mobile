@@ -34,15 +34,17 @@ const styles = StyleSheet.create({
 });
 
 QuestionListItem.propTypes = {
-    navigation: PropTypes.object,
-    question: PropTypes.object,
+    openQuestion: PropTypes.func.isRequired,
+    question: PropTypes.object.isRequired,
 };
 
 QuestionTitle.propTypes = {
     question: PropTypes.shape({
-        number: PropTypes.number,
+        id: PropTypes.number.isRequired,
+        number: PropTypes.number.isRequired,
         name: PropTypes.string,
-    }),
+        disciplineId: PropTypes.number.isRequired,
+    }).isRequired,
 };
 
 export default QuestionListItem;

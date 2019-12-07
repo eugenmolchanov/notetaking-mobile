@@ -22,8 +22,7 @@ const QuestionDrawerItems = (props) => {
 };
 
 QuestionDrawerItems.propTypes = {
-    navigation: PropTypes.object,
-    contractions: PropTypes.array,
+    navigation: PropTypes.object.isRequired,
 };
 
 export default QuestionDrawerItems;

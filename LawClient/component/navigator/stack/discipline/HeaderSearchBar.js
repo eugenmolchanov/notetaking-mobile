@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 });
 
 HeaderSearchBar.propTypes = {
-    onValueChange: PropTypes.func,
+    onValueChange: PropTypes.func.isRequired,
 };
 
 export default HeaderSearchBar;

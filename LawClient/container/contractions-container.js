@@ -1,11 +1,11 @@
-import { connect } from "react-redux";
-import ContractionList from "../component/navigator/switch/question.options/contractions/ContractionList";
+import { connect } from 'react-redux';
+import ContractionList from '../component/navigator/switch/question.options/contractions/ContractionList';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        contractions: state.question.question.contractions || [],
+        contractions: state.question.question.contractions || {},
         navigation: ownProps.navigation,
-    }
+    };
 };
 
-export default connect(mapStateToProps) (ContractionList);
+export default connect(mapStateToProps)(ContractionList);

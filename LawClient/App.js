@@ -3,7 +3,7 @@ import MainPage from './container/main-page-container';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import allReducers from "./reducer/all-reducers";
+import allReducers from './reducer/all-reducers';
 
 const store = createStore(
     allReducers,

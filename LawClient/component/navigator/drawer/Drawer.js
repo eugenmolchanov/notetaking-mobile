@@ -17,18 +17,8 @@ const drawer = (props) => {
         case 'Questions':
             return <QuestionsDrawerItems navigation={navigation}/>;
         case 'Question':
-            if (!navigationState.index) {
-                return <QuestionDrawerItems navigation={navigation}/>;
-            } else {
-                const currentPageOnSwitchNavigator = navigationState.routes[1].index;
-                const switchRouteName = navigationState.routes[1].routes[currentPageOnSwitchNavigator].routeName;
-                switch (switchRouteName) {
-                    case 'Contractions':
-                        return <QuestionOptionDrawerItems navigation={navigation}/>;
-                    case 'QuestionShortContent':
-                        return <QuestionOptionDrawerItems navigation={navigation}/>;
-                }
-            }
+            return !navigationState.index ? <QuestionDrawerItems navigation={navigation}/> :
+                <QuestionOptionDrawerItems navigation={navigation}/>;
     }
 };
 
@@ -43,7 +33,7 @@ const Drawer = (props) => {
 };
 
 Drawer.propTypes = {
-    navigation: PropTypes.object,
+    navigation: PropTypes.object.isRequired,
 };
 
 export default Drawer;

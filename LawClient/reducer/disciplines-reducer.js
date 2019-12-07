@@ -1,7 +1,8 @@
 import { RECEIVE_DISCIPLINES, REQUEST_DISCIPLINES } from '../util/constants';
 
 const initialState = {
-    disciplines: [],
+    disciplines: {},
+    isFetching: true,
 };
 
 export default function (state = initialState, action) {

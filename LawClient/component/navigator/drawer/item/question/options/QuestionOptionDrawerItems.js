@@ -27,7 +27,7 @@ const QuestionOptionDrawerItems = (props) => {
 };
 
 QuestionOptionDrawerItems.propTypes = {
-    navigation: PropTypes.object,
+    navigation: PropTypes.object.isRequired,
 };
 
 export default QuestionOptionDrawerItems;

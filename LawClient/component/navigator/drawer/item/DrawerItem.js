@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
 });
 
 DrawerItem.propTypes = {
-    name: PropTypes.string,
-    onPress: PropTypes.func,
-    leftIcon: PropTypes.object,
+    name: PropTypes.string.isRequired,
+    onPress: PropTypes.func.isRequired,
+    leftIcon: PropTypes.object.isRequired,
 };
 
 export default DrawerItem;

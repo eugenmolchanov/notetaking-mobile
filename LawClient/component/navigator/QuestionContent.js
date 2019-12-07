@@ -43,10 +43,10 @@ const questionContentStyles = StyleSheet.create({
 
 QuestionContent.propTypes = {
     question: PropTypes.shape({
-        number: PropTypes.number,
-        name: PropTypes.string,
-    }),
-    content: PropTypes.string,
+        number: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+    }).isRequired,
+    content: PropTypes.string.isRequired,
 };
 
 export default QuestionContent;

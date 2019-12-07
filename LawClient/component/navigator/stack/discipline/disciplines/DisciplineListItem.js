@@ -32,13 +32,13 @@ const styles = StyleSheet.create({
 });
 
 DisciplineListItem.propTypes = {
-    name: PropTypes.string,
-    navigation: PropTypes.object,
     discipline: PropTypes.shape({
-        abbreviation: PropTypes.string,
-        questions: PropTypes.array,
-        name: PropTypes.string,
-    }),
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        abbreviation: PropTypes.string.isRequired,
+        freeAccess: PropTypes.bool.isRequired,
+    }).isRequired,
+    openDiscipline: PropTypes.func.isRequired,
 };
 
 export default DisciplineListItem;

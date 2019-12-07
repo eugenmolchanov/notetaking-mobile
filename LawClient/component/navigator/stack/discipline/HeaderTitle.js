@@ -4,7 +4,6 @@ import { View, StyleSheet } from 'react-native';
 import * as PropTypes from 'prop-types';
 
 const HeaderTitle = (props) => {
-
     return (
         <View style={styles.searchWrapper}>
             <HeaderSearchBar onValueChange={props.onSearchValueChange}/>
@@ -19,7 +18,7 @@ const styles = StyleSheet.create({
 });
 
 HeaderTitle.propTypes = {
-    onSearchValueChange: PropTypes.func,
+    onSearchValueChange: PropTypes.func.isRequired,
 };
 
 export default HeaderTitle;

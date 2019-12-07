@@ -1,7 +1,8 @@
 import { RECEIVE_QUESTIONS, REQUEST_QUESTIONS } from '../util/constants';
 
 const initialState = {
-    questions: [],
+    questions: {},
+    isFetching: true,
 };
 
 export default function (state = initialState, action) {
@@ -9,7 +10,7 @@ export default function (state = initialState, action) {
         case REQUEST_QUESTIONS:
             return Object.assign({
                 isFetching: true,
-                questions: []
+                questions: [],
             }, state);
         case RECEIVE_QUESTIONS:
             return Object.assign({

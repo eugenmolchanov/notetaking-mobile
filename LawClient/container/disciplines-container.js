@@ -1,6 +1,6 @@
 import DisciplineList from '../component/navigator/stack/discipline/disciplines/DisciplineList';
 import {connect} from 'react-redux';
-import { openDiscipline } from "../action/action-creator";
+import { openDiscipline } from '../action/action-creator';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -13,7 +13,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         openDiscipline: id => dispatch(openDiscipline(id, ownProps.navigation)),
-    }
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DisciplineList);

@@ -19,7 +19,8 @@ const ContractionList = (props) => {
 };
 
 ContractionList.propTypes = {
-    navigation: PropTypes.object,
+    navigation: PropTypes.object.isRequired,
+    contractions: PropTypes.object.isRequired,
 };
 
 export default ContractionList;

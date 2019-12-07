@@ -3,7 +3,7 @@ import {
     RECEIVE_QUESTIONS,
     REQUEST_DISCIPLINES,
     REQUEST_QUESTION,
-    REQUEST_QUESTIONS
+    REQUEST_QUESTIONS,
 } from '../util/constants';
 import Realm from 'realm';
 import LawSchemas from '../database.schema/LawSchemas';
@@ -23,7 +23,7 @@ export const fetchDisciplines = () => {
         try {
             let realm = await Realm.open({ schema: LawSchemas });
             let disciplines = await realm.objects('Discipline');
-            if (!disciplines.length) {
+            if (disciplines.isEmpty()) {
                 let response = await fetch('http://192.168.100.7:8080/disciplines/access/free');
 
                 let data = await response.json();
@@ -46,7 +46,7 @@ export const fetchDisciplines = () => {
                                             name: contraction.name,
                                             description: contraction.description,
                                         },
-                                        Realm.UpdateMode.All)
+                                        Realm.UpdateMode.All);
                                 });
 
                                 realm.create('Question', {
@@ -64,7 +64,7 @@ export const fetchDisciplines = () => {
                                         contractions: question.contractions,
                                     },
                                     Realm.UpdateMode.All);
-                            })
+                            });
                         });
                     });
                 } catch (e) {
@@ -90,8 +90,8 @@ export const openDiscipline = (id, navigation) => {
         dispatch({
             type: RECEIVE_QUESTIONS,
             payload: await realm.objects('Question').filtered(`disciplineId == ${id}`),
-        })
-    }
+        });
+    };
 };
 
 export const openQuestion = (question, navigation) => {
@@ -109,6 +109,6 @@ export const openQuestion = (question, navigation) => {
         dispatch({
             type: RECEIVE_QUESTION,
             payload: payload,
-        })
-    }
+        });
+    };
 };

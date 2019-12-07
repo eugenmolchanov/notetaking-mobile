@@ -16,7 +16,10 @@ const QuestionShortContent = (props) => {
 };
 
 QuestionContent.propTypes = {
-    navigation: PropTypes.object,
+    navigation: PropTypes.object.isRequired,
+    question: PropTypes.shape({
+        shortContent: PropTypes.string.isRequired,
+    }).isRequired,
 };
 
 export default QuestionShortContent;

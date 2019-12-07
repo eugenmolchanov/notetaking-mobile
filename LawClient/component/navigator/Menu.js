@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 });
 
 Menu.propTypes = {
-    navigation: PropTypes.object,
+    navigation: PropTypes.object.isRequired,
 };
 
 export default Menu;

@@ -35,12 +35,12 @@ const styles = StyleSheet.create({
 });
 
 OptionHeader.propTypes = {
-    navigation: PropTypes.object,
-    title: PropTypes.string,
+    navigation: PropTypes.object.isRequired,
+    title: PropTypes.string.isRequired,
 };
 
 ClosePage.propTypes = {
-    navigation: PropTypes.object,
+    navigation: PropTypes.object.isRequired,
 };
 
 export default OptionHeader;

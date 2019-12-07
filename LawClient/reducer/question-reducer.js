@@ -2,6 +2,7 @@ import { RECEIVE_QUESTION, REQUEST_QUESTION } from '../util/constants';
 
 const initialState = {
     question: {},
+    isFetching: true,
 };
 
 export default function (state = initialState, action) {

@@ -1,6 +1,6 @@
-const navigateToScreen = (route, navigation, props) => () => {
+const navigateToScreen = (route, navigation) => () => {
     navigation.closeDrawer();
-    navigation.navigate(route, props);
+    navigation.navigate(route);
 };
 
 export { navigateToScreen };

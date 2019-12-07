@@ -1,10 +1,10 @@
-import { ActivityIndicator, ScrollView, View, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native';
 import React from 'react';
 import DisciplineListItem from './DisciplineListItem';
 import HeaderTitle from '../HeaderTitle';
 import Menu from '../../../Menu';
 import * as PropTypes from 'prop-types';
-import { spinner } from "../../../../../util/styles";
+import AwaitedContent from '../util/AwaitedContent';
 
 class DisciplineList extends React.Component {
     static navigationOptions = ({ navigation }) => {
@@ -37,7 +37,7 @@ class DisciplineList extends React.Component {
             discipline.abbreviation.toLowerCase().includes(searchValue);
     };
 
-    render() {
+    _renderDisciplines = () => {
         const disciplines = this.props.disciplines
             .filter(discipline => {
                 return this.state.searchValue ?
@@ -49,22 +49,23 @@ class DisciplineList extends React.Component {
                                            openDiscipline={this.props.openDiscipline}/>;
             });
 
-        return this.props.isFetching ? (
-            <View style={spinner.container}>
-                <ActivityIndicator size={'large'}/>
-            </View>
-        ) : (
+        return (
             <ScrollView>
                 {disciplines}
             </ScrollView>
         );
+    };
+
+    render() {
+        return <AwaitedContent isFetching={this.props.isFetching} render={this._renderDisciplines}/>;
     }
 }
 
 DisciplineList.propTypes = {
-    disciplines: PropTypes.array,
-    isFetching: PropTypes.bool,
-    navigation: PropTypes.object,
+    disciplines: PropTypes.object.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    navigation: PropTypes.object.isRequired,
+    openDiscipline: PropTypes.func.isRequired,
 };
 
 export default DisciplineList;
