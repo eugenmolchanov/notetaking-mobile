@@ -1,10 +1,11 @@
 import React from 'react';
 import QuestionListItem from './QuestionListItem';
-import { ScrollView } from 'react-native';
+import { ActivityIndicator, ScrollView, View } from 'react-native';
 import HeaderTitle from '../HeaderTitle';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Menu from '../../../Menu';
 import * as PropTypes from 'prop-types';
+import { spinner } from "../../../../../util/styles";
 
 const backButtonIcon = <Icon name="chevron-left" size={35}/>;
 
@@ -50,7 +51,11 @@ class QuestionList extends React.Component {
                                          openQuestion={this.props.openQuestion}/>;
             });
 
-        return (
+        return this.props.isFetching ? (
+            <View style={spinner.spinnerContainer}>
+                <ActivityIndicator size={'large'}/>
+            </View>
+        ) : (
             <ScrollView>
                 {questions}
             </ScrollView>

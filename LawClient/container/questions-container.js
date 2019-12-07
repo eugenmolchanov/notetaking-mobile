@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        openQuestion: id => dispatch(openQuestion(id, ownProps.navigation)),
+        openQuestion: question => dispatch(openQuestion(question, ownProps.navigation)),
     }
 };
 

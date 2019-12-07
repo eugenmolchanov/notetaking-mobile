@@ -22,7 +22,7 @@ const QuestionListItem = (props) => {
         <ListItem
             title={<QuestionTitle question={question}/>}
             chevron={rightChevron}
-            onPress={() => openQuestion(question.id)}
+            onPress={() => openQuestion(question)}
             bottomDivider />
     );
 };

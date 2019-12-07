@@ -89,15 +89,13 @@ export const openDiscipline = (id, navigation) => {
     }
 };
 
-export const openQuestion = (id, navigation) => {
+export const openQuestion = (question, navigation) => {
     return async dispatch => {
         requestItems(REQUEST_QUESTION, dispatch);
         navigation.navigate('Question');
-        let realm = await Realm.open({ schema: LawSchemas });
-        let questions = await realm.objects('Question').filtered(`id == ${id}`);
         dispatch({
             type: RECEIVE_QUESTION,
-            payload: questions.length ? questions[0] : null,
+            payload: question,
         })
     }
 };

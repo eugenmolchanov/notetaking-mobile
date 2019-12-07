@@ -4,6 +4,7 @@ import DisciplineListItem from './DisciplineListItem';
 import HeaderTitle from '../HeaderTitle';
 import Menu from '../../../Menu';
 import * as PropTypes from 'prop-types';
+import { spinner } from "../../../../../util/styles";
 
 class DisciplineList extends React.Component {
     static navigationOptions = ({ navigation }) => {
@@ -49,7 +50,7 @@ class DisciplineList extends React.Component {
             });
 
         return this.props.isFetching ? (
-            <View style={styles.spinnerContainer}>
+            <View style={spinner.spinnerContainer}>
                 <ActivityIndicator size={'large'}/>
             </View>
         ) : (
@@ -65,13 +66,5 @@ DisciplineList.propTypes = {
     isFetching: PropTypes.bool,
     navigation: PropTypes.object,
 };
-
-const styles = StyleSheet.create({
-    spinnerContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        flexDirection: 'column',
-    },
-});
 
 export default DisciplineList;
