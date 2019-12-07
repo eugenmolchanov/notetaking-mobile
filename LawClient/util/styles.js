@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const spinner = StyleSheet.create({
-    spinnerContainer: {
+    container: {
         flex: 1,
         justifyContent: 'center',
         flexDirection: 'column',

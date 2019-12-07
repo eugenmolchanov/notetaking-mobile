@@ -3,7 +3,7 @@ import ContractionList from "../component/navigator/switch/question.options/cont
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        contractions: state.question.question.contractions,
+        contractions: state.question.question.contractions || [],
         navigation: ownProps.navigation,
     }
 };

@@ -16,9 +16,17 @@ const QuestionSchema = {
         id: 'int',
         name: 'string',
         number: 'int',
+        disciplineId: 'int',
+    },
+};
+
+const QuestionContentSchema = {
+    name: 'QuestionContent',
+    primaryKey: 'questionId',
+    properties: {
+        questionId: 'int',
         fullContent: 'string',
         shortContent: 'string',
-        disciplineId: 'int',
         contractions: 'Contraction[]',
     },
 };
@@ -33,6 +41,6 @@ const ContractionSchema = {
     },
 };
 
-const schemas = [DisciplineSchema, QuestionSchema, ContractionSchema];
+const schemas = [DisciplineSchema, QuestionSchema, ContractionSchema, QuestionContentSchema];
 
 export default schemas;

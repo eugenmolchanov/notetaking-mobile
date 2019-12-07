@@ -52,7 +52,7 @@ class QuestionList extends React.Component {
             });
 
         return this.props.isFetching ? (
-            <View style={spinner.spinnerContainer}>
+            <View style={spinner.container}>
                 <ActivityIndicator size={'large'}/>
             </View>
         ) : (
