@@ -15,7 +15,7 @@ const QuestionShortContent = (props) => {
     );
 };
 
-QuestionContent.propTypes = {
+QuestionShortContent.propTypes = {
     navigation: PropTypes.object.isRequired,
     question: PropTypes.shape({
         shortContent: PropTypes.string.isRequired,

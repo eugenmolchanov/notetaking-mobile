@@ -34,8 +34,7 @@ class Question extends React.Component {
 Question.propTypes = {
     isFetching: PropTypes.bool.isRequired,
     question: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        fullContent: PropTypes.string.isRequired,
+        fullContent: PropTypes.string,
     }).isRequired,
 };
 
