@@ -1,6 +1,8 @@
 import React from 'react';
-import AppContainer from '../navigator/app-container';
+import AppContainer from './AppContainer';
 import * as PropTypes from 'prop-types';
+import { fetchDisciplines } from '../action/action-creator';
+import { connect } from 'react-redux';
 
 class MainPage extends React.Component {
     constructor(props) {
@@ -22,4 +24,10 @@ MainPage.propTypes = {
     fetchDisciplines: PropTypes.func.isRequired,
 };
 
-export default MainPage;
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchDisciplines: () => dispatch(fetchDisciplines()),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(MainPage);

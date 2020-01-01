@@ -2,8 +2,8 @@ import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-const AwaitedContent = (props) => {
-    return props.isFetching ? <Spinner/> : props.render();
+const AwaitedContent = ({ isFetching, render }) => {
+    return isFetching ? <Spinner/> : render();
 };
 
 const Spinner = () => {

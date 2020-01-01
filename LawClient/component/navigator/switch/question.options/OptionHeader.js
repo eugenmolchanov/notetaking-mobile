@@ -5,23 +5,23 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import * as PropTypes from 'prop-types';
 
-const ClosePage = (props) => {
+const ClosePage = ({ navigation }) => {
     return (
         <TouchableOpacity onPress={() => {
-            props.navigation.navigate('Question');
-            props.navigation.openDrawer();
+            navigation.navigate('Question');
+            navigation.openDrawer();
         }}>
             <Icon name="close" size={25}/>
         </TouchableOpacity>
     );
 };
 
-const OptionHeader = (props) => {
+const OptionHeader = ({ navigation, title }) => {
     return (
         <Header
-            leftComponent={<Menu navigation={props.navigation}/>}
-            rightComponent={<ClosePage navigation={props.navigation}/>}
-            centerComponent={{ text: props.title, style: { fontSize: 20 } }}
+            leftComponent={<Menu navigation={navigation}/>}
+            rightComponent={<ClosePage navigation={navigation}/>}
+            centerComponent={{ text: title, style: { fontSize: 20 } }}
             containerStyle={styles.headerContainer}
             backgroundColor={'inherit'}/>
     );

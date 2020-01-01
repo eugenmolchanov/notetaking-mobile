@@ -3,11 +3,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-const Menu = (props) => {
+const Menu = ({ navigation }) => {
     return (
-        <TouchableOpacity style={styles.menuWrapper} onPress={() => {
-            props.navigation.openDrawer();
-        }}>
+        <TouchableOpacity style={styles.menuWrapper} onPress={() => {navigation.openDrawer();}}>
             <Icon name="dehaze" size={25}/>
         </TouchableOpacity>
     );

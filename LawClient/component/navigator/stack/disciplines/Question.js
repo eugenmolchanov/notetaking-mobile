@@ -1,9 +1,10 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Menu from '../../../Menu';
-import QuestionContent from '../../../QuestionContent';
+import Menu from '../../Menu';
+import QuestionContent from '../../QuestionContent';
 import * as PropTypes from 'prop-types';
-import AwaitedContent from '../util/AwaitedContent';
+import AwaitedContent from './AwaitedContent';
+import { connect } from 'react-redux';
 
 const backButtonIcon = <Icon name="close" size={25}/>;
 
@@ -38,4 +39,11 @@ Question.propTypes = {
     }).isRequired,
 };
 
-export default Question;
+const mapStateToProps = state => {
+    return {
+        isFetching: state.question.isFetching,
+        question: state.question.question,
+    };
+};
+
+export default connect(mapStateToProps)(Question);

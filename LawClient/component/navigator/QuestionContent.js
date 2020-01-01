@@ -3,8 +3,7 @@ import HtmlView from 'react-native-htmlview';
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-const QuestionContent = (props) => {
-    const { question, content } = props;
+const QuestionContent = ({ question, content }) => {
     return (
         <ScrollView style={styles.questionWrapper}>
             <Text style={styles.questionHeader}>Вопрос {question.number}. {question.name}</Text>

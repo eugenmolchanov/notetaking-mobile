@@ -1,5 +1,5 @@
 import React from 'react';
-import MainPage from './container/main-page-container';
+import MainPage from './component/MainPage';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
