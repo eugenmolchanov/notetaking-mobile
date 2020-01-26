@@ -6,9 +6,22 @@ import {
     REQUEST_QUESTIONS,
 } from '../util/constants';
 import Realm from 'realm';
-import LawSchemas from '../database.schema/LawSchemas';
+import LawSchemas from '../database.schema/schemas';
+import {Action, Discipline, Question} from "../component/Types";
+import {NavigationStackProp} from "react-navigation-stack";
 
-const requestItems = (items, dispatch) => {
+type Dispatch = (action: Action) => void
+
+interface DisciplineDto extends Discipline {
+    questions: Array<QuestionDto>
+    isFree: boolean
+}
+
+interface QuestionDto extends Question {
+
+}
+
+const requestItems = (items: string, dispatch: Dispatch) => {
     dispatch({
         type: items,
         payload: {},
@@ -16,7 +29,7 @@ const requestItems = (items, dispatch) => {
 };
 
 export const fetchDisciplines = () => {
-    return async dispatch => {
+    return async (dispatch: Dispatch) => {
         requestItems(REQUEST_DISCIPLINES, dispatch);
 
         //ToDo handle error (redirect to empty state)
@@ -29,7 +42,7 @@ export const fetchDisciplines = () => {
                 let data = await response.json();
                 try {
                     realm.write(() => {
-                        data.forEach(discipline => {
+                        data.forEach((discipline: DisciplineDto) => {
                             realm.create('Discipline', {
                                     id: discipline.id,
                                     name: discipline.name,
@@ -39,7 +52,7 @@ export const fetchDisciplines = () => {
                                 Realm.UpdateMode.All);
 
 
-                            discipline.questions.forEach(question => {
+                            discipline.questions.forEach((question: QuestionDto) => {
                                 question.contractions.forEach(contraction => {
                                     realm.create('Contraction', {
                                             id: contraction.id,
@@ -82,8 +95,8 @@ export const fetchDisciplines = () => {
     };
 };
 
-export const openDiscipline = (id, navigation) => {
-    return async dispatch => {
+export const openDiscipline = (id: number, navigation: NavigationStackProp) => {
+    return async (dispatch: Dispatch) => {
         requestItems(REQUEST_QUESTIONS, dispatch);
         navigation.navigate('Questions');
         let realm = await Realm.open({ schema: LawSchemas });
@@ -94,8 +107,8 @@ export const openDiscipline = (id, navigation) => {
     };
 };
 
-export const openQuestion = (question, navigation) => {
-    return async dispatch => {
+export const openQuestion = (question: Question, navigation: NavigationStackProp) => {
+    return async (dispatch: Dispatch) => {
         requestItems(REQUEST_QUESTION, dispatch);
         navigation.navigate('Question');
         let realm = await Realm.open({ schema: LawSchemas });

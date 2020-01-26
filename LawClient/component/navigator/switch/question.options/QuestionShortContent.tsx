@@ -2,10 +2,16 @@ import React from 'react';
 import { View } from 'react-native';
 import OptionHeader from './OptionHeader';
 import QuestionContent from '../../QuestionContent';
-import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import {AppState, Question, StackNavigationOptions} from "../../../Types";
+import {NavigationStackProp} from "react-navigation-stack";
 
-const QuestionShortContent = ({ question, navigation }) => {
+interface QuestionShortContentProps {
+    question: Question
+    navigation: NavigationStackProp
+}
+
+const QuestionShortContent = ({ question, navigation }: QuestionShortContentProps) => {
     return (
         <View>
             <OptionHeader navigation={navigation} title={'Коротко по вопросу'}/>
@@ -14,16 +20,9 @@ const QuestionShortContent = ({ question, navigation }) => {
     );
 };
 
-QuestionShortContent.propTypes = {
-    navigation: PropTypes.object.isRequired,
-    question: PropTypes.shape({
-        shortContent: PropTypes.string.isRequired,
-    }).isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ({ question }: AppState, ownProps: StackNavigationOptions) => {
     return {
-        question: state.question.question,
+        question: question.question,
         navigation: ownProps.navigation,
     };
 };

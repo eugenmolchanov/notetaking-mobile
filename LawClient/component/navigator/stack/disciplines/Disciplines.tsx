@@ -2,16 +2,39 @@ import { ScrollView, StyleSheet, Text } from 'react-native';
 import React from 'react';
 import HeaderTitle from './HeaderTitle';
 import Menu from '../../Menu';
-import * as PropTypes from 'prop-types';
 import AwaitedContent from './AwaitedContent';
 import { ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { openDiscipline } from '../../../../action/action-creator';
 import { connect } from 'react-redux';
+import {
+    AppState,
+    AsyncAction,
+    Discipline,
+    ShowItem,
+    StackNavigationOptions
+} from "../../../Types";
+import {NavigationStackProp, NavigationStackScreenProps} from "react-navigation-stack";
 
 const rightChevron = <Icon name="navigate-next" size={25}/>;
 
-const Discipline = ({ discipline, showDiscipline }) => {
+interface DisciplineProps {
+    discipline: Discipline
+    showDiscipline: ShowItem
+}
+
+interface DisciplinesProps {
+    navigation: NavigationStackProp
+    disciplines: Array<Discipline>
+    openDiscipline: ShowItem
+    isFetching: boolean
+}
+
+interface DisciplinesState {
+    searchValue: string
+}
+
+const DisciplineComponent = ({ discipline, showDiscipline }: DisciplineProps) => {
     return (
         <ListItem
             title={discipline.name}
@@ -26,15 +49,15 @@ const Discipline = ({ discipline, showDiscipline }) => {
     );
 };
 
-class Disciplines extends React.Component {
-    static navigationOptions = ({ navigation }) => {
+class Disciplines extends React.Component<DisciplinesProps, DisciplinesState> {
+    static navigationOptions = ({ navigation }: StackNavigationOptions) => {
         return {
             headerTitle: <HeaderTitle onSearchValueChange={navigation.getParam('onSearchValueChange')}/>,
             headerRight: <Menu navigation={navigation}/>,
         };
     };
 
-    constructor(props) {
+    constructor(props: DisciplinesProps) {
         super(props);
         this.state = {
             searchValue: '',
@@ -45,13 +68,13 @@ class Disciplines extends React.Component {
         this.props.navigation.setParams({ 'onSearchValueChange': this._onSearchValueChange });
     }
 
-    _onSearchValueChange = (searchValue) => {
+    _onSearchValueChange = (searchValue: string) => {
         this.setState({
             searchValue,
         });
     };
 
-    _isDisciplineContainsSearchValue = (discipline) => {
+    _isDisciplineContainsSearchValue = (discipline: Discipline) => {
         const searchValue = this.state.searchValue.toLowerCase();
         return discipline.name.toLowerCase().includes(searchValue) ||
             discipline.abbreviation.toLowerCase().includes(searchValue);
@@ -65,7 +88,7 @@ class Disciplines extends React.Component {
                     true;
             })
             .map(discipline => {
-                return <Discipline key={discipline.id} discipline={discipline}
+                return <DisciplineComponent key={discipline.id} discipline={discipline}
                                            showDiscipline={this.props.openDiscipline}/>;
             });
 
@@ -90,34 +113,17 @@ const styles = StyleSheet.create({
     },
 });
 
-Discipline.propTypes = {
-    discipline: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        abbreviation: PropTypes.string.isRequired,
-        freeAccess: PropTypes.bool.isRequired,
-    }).isRequired,
-    showDiscipline: PropTypes.func.isRequired,
-};
-
-Disciplines.propTypes = {
-    disciplines: PropTypes.object.isRequired,
-    isFetching: PropTypes.bool.isRequired,
-    navigation: PropTypes.object.isRequired,
-    openDiscipline: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ({ disciplines }: AppState, { navigation }: NavigationStackScreenProps) => {
     return {
-        disciplines: state.disciplines.disciplines,
-        isFetching: state.disciplines.isFetching,
-        navigation: ownProps.navigation,
+        disciplines: disciplines.disciplines,
+        isFetching: disciplines.isFetching,
+        navigation: navigation,
     };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch: AsyncAction, { navigation }: NavigationStackScreenProps) => {
     return {
-        openDiscipline: id => dispatch(openDiscipline(id, ownProps.navigation)),
+        openDiscipline: (id: number) => dispatch(openDiscipline(id, navigation)),
     };
 };
 

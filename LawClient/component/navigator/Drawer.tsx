@@ -1,9 +1,9 @@
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import React from 'react';
-import * as PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { ListItem } from 'react-native-elements';
-
+import {NavigationDrawerProperty} from "../Types";
+import {DrawerContentComponentProps, NavigationDrawerProp} from "react-navigation-drawer";
 const disciplinesIcon = <Icon name={'format-list-bulleted'} size={25}/>;
 const questionIcon = <Icon name={'help-outline'} size={25}/>;
 const questionsIcon = <Icon name={'format-list-numbered'} size={25}/>;
@@ -11,12 +11,22 @@ const functionIcon = <Icon name={'announcement'} size={25}/>;
 const contractionIcon = <Icon name={'text-format'} size={25}/>;
 const questionShortContentIcon = <Icon name={'description'} size={25}/>;
 
-const navigateToScreen = (route, navigation) => () => {
+interface DrawerItemProps {
+    name: string
+    onPress: () => void
+    leftIcon: JSX.Element
+}
+
+interface DrawerItemsProps {
+    navigation: NavigationDrawerProperty
+}
+
+const navigateToScreen = (route: string, navigation: any) => () => {
     navigation.closeDrawer();
     navigation.navigate(route);
 };
 
-const DrawerItem = ({ name, onPress, leftIcon }) => {
+const DrawerItem = ({ name, onPress, leftIcon }: DrawerItemProps) => {
     return (
         <ListItem
             title={name}
@@ -27,21 +37,21 @@ const DrawerItem = ({ name, onPress, leftIcon }) => {
     );
 };
 
-const DisciplinesDrawerItems = ({ navigation }) => {
+const DisciplinesDrawerItems = ({ navigation }: DrawerItemsProps) => {
     return (
         <DrawerItem onPress={navigateToScreen('Disciplines', navigation)} name={'К списку дисциплин'}
                     leftIcon={disciplinesIcon}/>
     );
 };
 
-const QuestionsDrawerItems = ({ navigation }) => {
+const QuestionsDrawerItems = ({ navigation }: DrawerItemsProps) => {
     return (
         <DrawerItem onPress={navigateToScreen('Questions', navigation)} name={'К списку вопросов'}
                     leftIcon={questionsIcon}/>
     );
 };
 
-const QuestionDrawerItems = ({ navigation }) => {
+const QuestionDrawerItems = ({ navigation }: DrawerItemsProps) => {
     return (
         <View>
             <DrawerItem onPress={navigateToScreen('Contractions', navigation)}
@@ -54,7 +64,7 @@ const QuestionDrawerItems = ({ navigation }) => {
     );
 };
 
-const QuestionOptionDrawerItems = ({ navigation }) => {
+const QuestionOptionDrawerItems = ({ navigation }: DrawerItemsProps) => {
     return (
         <View>
             <DrawerItem onPress={navigateToScreen('Question', navigation)} name={'К изучаемому вопросу'}
@@ -70,7 +80,7 @@ const QuestionOptionDrawerItems = ({ navigation }) => {
     );
 };
 
-const drawer = ({ navigation }) => {
+const drawer = (navigation: NavigationDrawerProperty) => {
     const navigationState = navigation.state;
     const currentPageOnStackNavigator = navigationState.routes[0].index;
     const stackRouteName = navigationState.routes[0].routes[currentPageOnStackNavigator].routeName;
@@ -85,11 +95,11 @@ const drawer = ({ navigation }) => {
     }
 };
 
-const Drawer = (props) => {
+const Drawer = ({ navigation }: DrawerContentComponentProps) => {
     return (
         <ScrollView>
             <SafeAreaView>
-                {drawer(props)}
+                {drawer(navigation)}
             </SafeAreaView>
         </ScrollView>
     );
@@ -100,31 +110,5 @@ const styles = StyleSheet.create({
         margin: 0,
     },
 });
-
-DrawerItem.propTypes = {
-    name: PropTypes.string.isRequired,
-    onPress: PropTypes.func.isRequired,
-    leftIcon: PropTypes.object.isRequired,
-};
-
-DisciplinesDrawerItems.propTypes = {
-    navigation: PropTypes.object.isRequired,
-};
-
-QuestionsDrawerItems.propTypes = {
-    navigation: PropTypes.object.isRequired,
-};
-
-QuestionDrawerItems.propTypes = {
-    navigation: PropTypes.object.isRequired,
-};
-
-QuestionOptionDrawerItems.propTypes = {
-    navigation: PropTypes.object.isRequired,
-};
-
-Drawer.propTypes = {
-    navigation: PropTypes.object.isRequired,
-};
 
 export default Drawer;

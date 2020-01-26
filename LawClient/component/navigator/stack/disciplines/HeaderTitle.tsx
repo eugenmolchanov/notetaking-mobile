@@ -1,20 +1,27 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import * as PropTypes from 'prop-types';
 import { SearchBar } from 'react-native-elements';
 
-class HeaderSearchBar extends React.Component {
-    constructor(props) {
+interface HeaderProps {
+    onSearchValueChange: (searchValue: string) => undefined
+}
+
+interface HeaderSearchBarState {
+    searchValue: string
+}
+
+class HeaderSearchBar extends React.Component<HeaderProps, HeaderSearchBarState> {
+    constructor(props: HeaderProps) {
         super(props);
         this.state = {
             searchValue: '',
         };
     }
 
-    _onType = (searchValue) => {
+    _onType = (searchValue: string) => {
         this.setState({
             searchValue,
-        }, this.props.onValueChange(searchValue));
+        }, this.props.onSearchValueChange(searchValue));
     };
 
     render() {
@@ -34,10 +41,10 @@ class HeaderSearchBar extends React.Component {
     }
 }
 
-const HeaderTitle = ({ onSearchValueChange }) => {
+const HeaderTitle = ({ onSearchValueChange }: HeaderProps) => {
     return (
         <View style={styles.searchWrapper}>
-            <HeaderSearchBar onValueChange={onSearchValueChange}/>
+            <HeaderSearchBar onSearchValueChange={onSearchValueChange}/>
         </View>
     );
 };
@@ -55,13 +62,5 @@ const styles = StyleSheet.create({
         borderTopColor: 'white',
     },
 });
-
-HeaderSearchBar.propTypes = {
-    onValueChange: PropTypes.func.isRequired,
-};
-
-HeaderTitle.propTypes = {
-    onSearchValueChange: PropTypes.func.isRequired,
-};
 
 export default HeaderTitle;

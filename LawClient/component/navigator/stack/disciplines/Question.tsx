@@ -2,21 +2,28 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Menu from '../../Menu';
 import QuestionContent from '../../QuestionContent';
-import * as PropTypes from 'prop-types';
 import AwaitedContent from './AwaitedContent';
 import { connect } from 'react-redux';
+import {AppState, StackNavigationOptions} from "../../../Types";
+import {Question} from "../../../Types";
+import {NavigationStackOptions} from "react-navigation-stack";
 
 const backButtonIcon = <Icon name="close" size={25}/>;
 
-class Question extends React.Component {
-    static navigationOptions = ({ navigation }) => {
+interface QuestionProps {
+    isFetching: boolean
+    question: Question
+}
+
+class QuestionComponent extends React.Component<QuestionProps> {
+    static navigationOptions = ({ navigation }: StackNavigationOptions): NavigationStackOptions => {
         return {
-            headerBackImage: backButtonIcon,
+            headerBackImage: () => backButtonIcon,
             headerRight: <Menu navigation={navigation}/>,
         };
     };
 
-    constructor(props) {
+    constructor(props: QuestionProps) {
         super(props);
     }
 
@@ -32,18 +39,11 @@ class Question extends React.Component {
     }
 }
 
-Question.propTypes = {
-    isFetching: PropTypes.bool.isRequired,
-    question: PropTypes.shape({
-        fullContent: PropTypes.string,
-    }).isRequired,
-};
-
-const mapStateToProps = state => {
+const mapStateToProps = ({ question }: AppState) => {
     return {
-        isFetching: state.question.isFetching,
-        question: state.question.question,
+        isFetching: question.isFetching,
+        question: question.question,
     };
 };
 
-export default connect(mapStateToProps)(Question);
+export default connect(mapStateToProps)(QuestionComponent);

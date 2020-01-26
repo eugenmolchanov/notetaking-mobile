@@ -3,16 +3,39 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import HeaderTitle from './HeaderTitle';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Menu from '../../Menu';
-import * as PropTypes from 'prop-types';
 import AwaitedContent from './AwaitedContent';
 import { ListItem } from 'react-native-elements';
 import { openQuestion } from '../../../../action/action-creator';
 import { connect } from 'react-redux';
+import {AppState, AsyncAction, Question, StackNavigationOptions} from "../../../Types";
+import {NavigationStackOptions, NavigationStackProp, NavigationStackScreenProps} from "react-navigation-stack";
 
 const backButtonIcon = <Icon name="chevron-left" size={35}/>;
 const rightChevron = <Icon name="navigate-next" size={25}/>;
 
-const QuestionTitle = ({ question }) => {
+type ShowQuestion = (question: Question) => Promise<void>
+
+interface QuestionsState {
+    searchValue: string
+}
+
+interface QuestionsProps {
+    navigation: NavigationStackProp
+    questions: Array<Question>
+    openQuestion: ShowQuestion
+    isFetching: boolean
+}
+
+interface QuestionProps {
+    question: Question
+    showQuestion: ShowQuestion
+}
+
+interface QuestionTitleProps {
+    question: Question
+}
+
+const QuestionTitle = ({ question }: QuestionTitleProps) => {
     return (
         <View>
             <Text style={styles.questionNumber}>Вопрос {question.number}</Text>
@@ -21,7 +44,7 @@ const QuestionTitle = ({ question }) => {
     );
 };
 
-const Question = ({ question, showQuestion }) => {
+const QuestionComponent = ({ question, showQuestion }: QuestionProps) => {
     return (
         <ListItem
             title={<QuestionTitle question={question}/>}
@@ -31,16 +54,16 @@ const Question = ({ question, showQuestion }) => {
     );
 };
 
-class Questions extends React.Component {
-    static navigationOptions = ({ navigation }) => {
+class Questions extends React.Component<QuestionsProps, QuestionsState> {
+    static navigationOptions = ({ navigation }: StackNavigationOptions): NavigationStackOptions => {
         return {
             headerTitle: <HeaderTitle onSearchValueChange={navigation.getParam('onQuestionListSearchValueChange')}/>,
-            headerBackImage: backButtonIcon,
+            headerBackImage: () => backButtonIcon,
             headerRight: <Menu navigation={navigation}/>,
         };
     };
 
-    constructor(props) {
+    constructor(props: QuestionsProps) {
         super(props);
         this.state = {
             searchValue: '',
@@ -51,13 +74,13 @@ class Questions extends React.Component {
         this.props.navigation.setParams({ 'onQuestionListSearchValueChange': this._onSearchValueChange });
     }
 
-    _onSearchValueChange = (searchValue) => {
+    _onSearchValueChange = (searchValue: string) => {
         this.setState({
             searchValue,
         });
     };
 
-    _isQuestionContainsSearchValue = (question) => {
+    _isQuestionContainsSearchValue = (question: Question) => {
         const searchValue = this.state.searchValue.toLowerCase();
         return question.name.toLowerCase().includes(searchValue) || question.number.toString().includes(searchValue);
     };
@@ -69,7 +92,7 @@ class Questions extends React.Component {
                     true;
             })
             .map(question => {
-                return <Question key={question.id} question={question}
+                return <QuestionComponent key={question.id} question={question}
                                          showQuestion={this.props.openQuestion}/>;
             });
 
@@ -91,38 +114,17 @@ const styles = StyleSheet.create({
     },
 });
 
-Question.propTypes = {
-    showQuestion: PropTypes.func.isRequired,
-    question: PropTypes.object.isRequired,
-};
-
-QuestionTitle.propTypes = {
-    question: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        number: PropTypes.number.isRequired,
-        name: PropTypes.string,
-        disciplineId: PropTypes.number.isRequired,
-    }).isRequired,
-};
-
-Questions.propTypes = {
-    isFetching: PropTypes.bool.isRequired,
-    questions: PropTypes.object.isRequired,
-    navigation: PropTypes.object.isRequired,
-    openQuestion: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ({ questions }: AppState, { navigation }: NavigationStackScreenProps) => {
     return {
-        questions: state.questions.questions,
-        isFetching: state.questions.isFetching,
-        navigation: ownProps.navigation,
+        questions: questions.questions,
+        isFetching: questions.isFetching,
+        navigation: navigation,
     };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch: AsyncAction, { navigation}: NavigationStackScreenProps) => {
     return {
-        openQuestion: question => dispatch(openQuestion(question, ownProps.navigation)),
+        openQuestion: (question: Question) => dispatch(openQuestion(question, navigation)),
     };
 };
 

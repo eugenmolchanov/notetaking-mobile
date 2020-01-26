@@ -3,9 +3,18 @@ import { Header } from 'react-native-elements';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import * as PropTypes from 'prop-types';
+import {NavigationStackProp} from "react-navigation-stack";
 
-const ClosePage = ({ navigation }) => {
+interface OptionHeaderProps {
+    navigation: NavigationStackProp
+    title: string
+}
+
+interface ClosePageProps {
+    navigation: NavigationStackProp
+}
+
+const ClosePage = ({ navigation }: ClosePageProps) => {
     return (
         <TouchableOpacity onPress={() => {
             navigation.navigate('Question');
@@ -16,7 +25,7 @@ const ClosePage = ({ navigation }) => {
     );
 };
 
-const OptionHeader = ({ navigation, title }) => {
+const OptionHeader = ({ navigation, title }: OptionHeaderProps) => {
     return (
         <Header
             leftComponent={<Menu navigation={navigation}/>}
@@ -33,14 +42,5 @@ const styles = StyleSheet.create({
         height: 60,
     },
 });
-
-OptionHeader.propTypes = {
-    navigation: PropTypes.object.isRequired,
-    title: PropTypes.string.isRequired,
-};
-
-ClosePage.propTypes = {
-    navigation: PropTypes.object.isRequired,
-};
 
 export default OptionHeader;

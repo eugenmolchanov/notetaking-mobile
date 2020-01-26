@@ -1,8 +1,12 @@
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import React from 'react';
-import * as PropTypes from 'prop-types';
 
-const AwaitedContent = ({ isFetching, render }) => {
+interface AwaitedContentProps {
+    isFetching: boolean
+    render: () => JSX.Element
+}
+
+const AwaitedContent = ({ isFetching, render }: AwaitedContentProps) => {
     return isFetching ? <Spinner/> : render();
 };
 
@@ -21,10 +25,5 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     },
 });
-
-AwaitedContent.propTypes = {
-    isFetching: PropTypes.bool.isRequired,
-    render: PropTypes.func.isRequired,
-};
 
 export default AwaitedContent;

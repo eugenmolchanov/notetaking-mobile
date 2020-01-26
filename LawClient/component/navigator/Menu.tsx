@@ -1,9 +1,13 @@
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import React from 'react';
-import * as PropTypes from 'prop-types';
+import {NavigationStackProp} from "react-navigation-stack";
 
-const Menu = ({ navigation }) => {
+interface MenuProps {
+    navigation: NavigationStackProp
+}
+
+const Menu = ({ navigation }: MenuProps) => {
     return (
         <TouchableOpacity style={styles.menuWrapper} onPress={() => {navigation.openDrawer();}}>
             <Icon name="dehaze" size={25}/>
@@ -16,9 +20,5 @@ const styles = StyleSheet.create({
        marginRight: 15,
    },
 });
-
-Menu.propTypes = {
-    navigation: PropTypes.object.isRequired,
-};
 
 export default Menu;
