@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import AppContainer from './AppContainer';
 import { fetchDisciplines } from '../action/action-creator';
 import { connect } from 'react-redux';
@@ -9,20 +9,15 @@ interface Props {
 
 type AsyncAction = (dispatch: any) => Promise<void>;
 
-class MainPage extends React.Component<Props, any> {
-    constructor(props: Props) {
-        super(props);
-    }
+const MainPage = (props: Props) => {
 
-    componentDidMount() {
-        this.props.fetchDisciplines();
-    }
+    useEffect(() => {
+        props.fetchDisciplines()
+    }, [])
 
-    render() {
-        return (
-            <AppContainer/>
-        );
-    }
+    return (
+        <AppContainer/>
+    )
 }
 
 function mapDispatchToProps(dispatch: AsyncAction): Props {
