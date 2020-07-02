@@ -3,125 +3,100 @@ import {
     RECEIVE_QUESTIONS,
     REQUEST_DISCIPLINES,
     REQUEST_QUESTION,
-    REQUEST_QUESTIONS,
+    REQUEST_QUESTIONS, START_LOGIN,
 } from '../util/constants';
-import Realm from 'realm';
-import LawSchemas from '../database.schema/schemas';
-import {Action, Discipline, Question} from "../component/Types";
+import {Action, Credentials, Question} from "../component/Types";
 import {NavigationStackProp} from "react-navigation-stack";
 
 type Dispatch = (action: Action) => void
-
-interface DisciplineDto extends Discipline {
-    questions: Array<QuestionDto>
-    isFree: boolean
-}
 
 interface QuestionDto extends Question {
 
 }
 
-const requestItems = (items: string, dispatch: Dispatch) => {
+const startRequest = (items: string, dispatch: Dispatch) => {
     dispatch({
         type: items,
         payload: {},
     });
 };
 
+const token = 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5YXVoZW5tYWxjaGFuYXVAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJleHAiOjE1OTM3MTk2MjAsImlhdCI6MTU5MzcwMTYyMH0.4tPYCt99pn98d_lw3aVJfxbNoMrnMVCuF6g1B6-TV-lhIVBnpw-n1Vr-SNKcbffMmdQLVBl0YTP80p8ASAHDPw';
+
 export const fetchDisciplines = () => {
+    console.log('call disciplines api')
+
     return async (dispatch: Dispatch) => {
-        requestItems(REQUEST_DISCIPLINES, dispatch);
+        startRequest(REQUEST_DISCIPLINES, dispatch);
 
         //ToDo handle error (redirect to empty state)
         try {
-            let realm = await Realm.open({ schema: LawSchemas });
-            let disciplines = await realm.objects('Discipline');
-            if (disciplines.isEmpty()) {
-                let response = await fetch('http://192.168.100.7:8080/disciplines/access/free');
+            let response = await fetch('http://192.168.0.112:8080/disciplines', {
+                headers: {
+                    'Authorization': token
+                },
+            });
 
-                let data = await response.json();
-                try {
-                    realm.write(() => {
-                        data.forEach((discipline: DisciplineDto) => {
-                            realm.create('Discipline', {
-                                    id: discipline.id,
-                                    name: discipline.name,
-                                    abbreviation: discipline.abbreviation,
-                                    freeAccess: discipline.isFree,
-                                },
-                                Realm.UpdateMode.All);
-
-
-                            discipline.questions.forEach((question: QuestionDto) => {
-                                question.contractions.forEach(contraction => {
-                                    realm.create('Contraction', {
-                                            id: contraction.id,
-                                            name: contraction.name,
-                                            description: contraction.description,
-                                        },
-                                        Realm.UpdateMode.All);
-                                });
-
-                                realm.create('Question', {
-                                        id: question.id,
-                                        name: question.name,
-                                        number: question.number,
-                                        disciplineId: discipline.id,
-                                    },
-                                    Realm.UpdateMode.All);
-
-                                realm.create('QuestionContent', {
-                                        questionId: question.id,
-                                        fullContent: question.fullContent,
-                                        shortContent: question.shortContent,
-                                        contractions: question.contractions,
-                                    },
-                                    Realm.UpdateMode.All);
-                            });
-                        });
-                    });
-                } catch (e) {
-                    console.log(e.message);
-                }
-            }
-
+            let data = await response.json();
             dispatch({
                 type: RECEIVE_DISCIPLINES,
-                payload: realm.objects('Discipline'),
+                payload: data,
             });
         } catch (e) {
-            console.log(e.message);
+            console.log(e.message + ' no!');
         }
     };
 };
 
 export const openDiscipline = (id: number, navigation: NavigationStackProp) => {
+    console.log('call discipline api')
     return async (dispatch: Dispatch) => {
-        requestItems(REQUEST_QUESTIONS, dispatch);
+        startRequest(REQUEST_QUESTIONS, dispatch);
         navigation.navigate('Questions');
-        let realm = await Realm.open({ schema: LawSchemas });
+        let response = await fetch(`http://192.168.0.112:8080/disciplines/${id}/questions`, {
+            headers: {
+                'Authorization': token
+            },
+        });
+        let questions = await response.json();
         dispatch({
             type: RECEIVE_QUESTIONS,
-            payload: await realm.objects('Question').filtered(`disciplineId == ${id}`),
+            payload: await questions,
         });
     };
 };
 
 export const openQuestion = (question: Question, navigation: NavigationStackProp) => {
-    return async (dispatch: Dispatch) => {
-        requestItems(REQUEST_QUESTION, dispatch);
-        navigation.navigate('Question');
-        let realm = await Realm.open({ schema: LawSchemas });
-        let questionContents = await realm.objects('QuestionContent').filtered(`questionId == ${question.id}`);
-        const payload = questionContents.length ? Object.assign(question, {
-            fullContent: questionContents[0].fullContent,
-            shortContent: questionContents[0].shortContent,
-            contractions: questionContents[0].contractions,
-            }) : question;
+    console.log('call question api')
 
+    return async (dispatch: Dispatch) => {
+        startRequest(REQUEST_QUESTION, dispatch);
+        navigation.navigate('Question');
+        console.log('add discipline id to question dto')
+        let response = await fetch(`http://192.168.0.112:8080/disciplines/2/questions/${question.id}`, {
+            headers: {
+                'Authorization': token
+            },
+        });
+        let questionDetails = await response.json();
         dispatch({
             type: RECEIVE_QUESTION,
-            payload: payload,
+            payload: questionDetails,
         });
     };
 };
+
+export const logIn = (credentials: Credentials) => {
+    return async (dispatch: Dispatch) => {
+        startRequest(START_LOGIN, dispatch)
+        let response = await fetch('http://192.168.0.112:8080/authentication', {
+            method: 'POST',
+            body: JSON.stringify(credentials),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+
+        console.log(response)
+    }
+}

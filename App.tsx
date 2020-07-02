@@ -1,9 +1,9 @@
 import React from 'react';
-import MainPage from './component/MainPage';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import allReducers from './reducer/all-reducers';
+import EntryPoint from "./component/EntryPoint";
 
 const store = createStore(
     allReducers,
@@ -13,7 +13,7 @@ const store = createStore(
 const App = () => {
     return (
         <Provider store={store}>
-            <MainPage/>
+            <EntryPoint/>
         </Provider>
     );
 };
