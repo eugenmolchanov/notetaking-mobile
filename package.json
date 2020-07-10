@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.21",
     "@emotion/native": "^10.0.14",
+    "@react-native-community/async-storage": "^1.11.0",
     "@types/react-native-htmlview": "^0.12.2",
     "@types/react-redux": "^7.1.5",
     "prop-types": "^15.7.2",

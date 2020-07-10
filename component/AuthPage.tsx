@@ -1,5 +1,5 @@
 import * as React from "react";
-import {StyleSheet, View} from "react-native";
+import {StyleSheet, View, Text} from "react-native";
 import {Button, Input} from "react-native-elements";
 import {useState} from "react";
 import {connect} from "react-redux";
@@ -7,13 +7,14 @@ import {logIn} from "../action/action-creator";
 import {AsyncAction, Credentials} from "./Types";
 
 interface Props {
-    logIn: (credentials: Credentials) => Promise<void>
+    logIn: (credentials: Credentials, setErrorMessage: (mes: string) => void) => Promise<void>
 }
 
 const AuthPage = (props: Props) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const onEmailChange = (value: string)  => setEmail(value)
     const onPasswordChange = (value: string) => setPassword(value)
@@ -23,7 +24,7 @@ const AuthPage = (props: Props) => {
             email: email,
             password: password
         }
-        props.logIn(credentials)
+        props.logIn(credentials, setErrorMessage)
     }
 
     return (
@@ -44,6 +45,7 @@ const AuthPage = (props: Props) => {
                 value={password}
                 onChangeText={onPasswordChange}
             />
+            <Text>{errorMessage}</Text>
             <Button
                 containerStyle={styles.container}
                 title={'Log in'}
@@ -65,7 +67,7 @@ const styles = StyleSheet.create({
 
 function mapDispatchToProps(dispatch: AsyncAction): Props {
     return {
-        logIn: (credentials: Credentials) => dispatch(logIn(credentials)),
+        logIn: (credentials: Credentials, setErrorMessage: (mes: string) => void) => dispatch(logIn(credentials, setErrorMessage)),
     };
 }
 

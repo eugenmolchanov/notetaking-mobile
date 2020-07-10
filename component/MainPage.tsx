@@ -4,7 +4,7 @@ import { fetchDisciplines } from '../action/action-creator';
 import { connect } from 'react-redux';
 
 interface Props {
-    fetchDisciplines: () => Promise<void>
+    fetchDisciplines: () => Promise<void>,
 }
 
 type AsyncAction = (dispatch: any) => Promise<void>;
@@ -20,7 +20,7 @@ const MainPage = (props: Props) => {
     )
 }
 
-function mapDispatchToProps(dispatch: AsyncAction): Props {
+function mapDispatchToProps(dispatch: AsyncAction) {
     return {
         fetchDisciplines: () => dispatch(fetchDisciplines()),
     };

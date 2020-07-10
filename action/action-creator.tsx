@@ -1,31 +1,35 @@
 import {
+    SUCCESS_LOGIN,
     RECEIVE_DISCIPLINES, RECEIVE_QUESTION,
     RECEIVE_QUESTIONS,
     REQUEST_DISCIPLINES,
     REQUEST_QUESTION,
-    REQUEST_QUESTIONS, START_LOGIN,
+    REQUEST_QUESTIONS, START_LOGIN, FAIL_LOGIN,
 } from '../util/constants';
 import {Action, Credentials, Question} from "../component/Types";
 import {NavigationStackProp} from "react-navigation-stack";
+import {AsyncStorage} from "react-native";
 
-type Dispatch = (action: Action) => void
+export type Dispatch = (action: Action) => void
 
-interface QuestionDto extends Question {
+const ACCESS_TOKEN_KEY = 'accessToken';
 
+const getBearerToken = async () => {
+    return 'Bearer ' + await AsyncStorage.getItem(ACCESS_TOKEN_KEY)
 }
 
-const startRequest = (items: string, dispatch: Dispatch) => {
-    dispatch({
-        type: items,
-        payload: {},
-    });
+const startRequest = (type: string, dispatch: Dispatch) => {
+    dispatch(action(type, {}));
 };
 
-const token = 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5YXVoZW5tYWxjaGFuYXVAZ21haWwuY29tIiwicm9sZSI6IlVzZXIiLCJleHAiOjE1OTM3MTk2MjAsImlhdCI6MTU5MzcwMTYyMH0.4tPYCt99pn98d_lw3aVJfxbNoMrnMVCuF6g1B6-TV-lhIVBnpw-n1Vr-SNKcbffMmdQLVBl0YTP80p8ASAHDPw';
+export const action = (type: string, payload: any) => {
+    return {
+        type: type,
+        payload: payload,
+    }
+}
 
 export const fetchDisciplines = () => {
-    console.log('call disciplines api')
-
     return async (dispatch: Dispatch) => {
         startRequest(REQUEST_DISCIPLINES, dispatch);
 
@@ -33,7 +37,7 @@ export const fetchDisciplines = () => {
         try {
             let response = await fetch('http://192.168.0.112:8080/disciplines', {
                 headers: {
-                    'Authorization': token
+                    'Authorization': await getBearerToken(),
                 },
             });
 
@@ -55,7 +59,7 @@ export const openDiscipline = (id: number, navigation: NavigationStackProp) => {
         navigation.navigate('Questions');
         let response = await fetch(`http://192.168.0.112:8080/disciplines/${id}/questions`, {
             headers: {
-                'Authorization': token
+                'Authorization': await getBearerToken(),
             },
         });
         let questions = await response.json();
@@ -75,7 +79,7 @@ export const openQuestion = (question: Question, navigation: NavigationStackProp
         console.log('add discipline id to question dto')
         let response = await fetch(`http://192.168.0.112:8080/disciplines/2/questions/${question.id}`, {
             headers: {
-                'Authorization': token
+                'Authorization': await getBearerToken(),
             },
         });
         let questionDetails = await response.json();
@@ -86,7 +90,7 @@ export const openQuestion = (question: Question, navigation: NavigationStackProp
     };
 };
 
-export const logIn = (credentials: Credentials) => {
+export const logIn = (credentials: Credentials, setErrorMessage: (mes: string) => void) => {
     return async (dispatch: Dispatch) => {
         startRequest(START_LOGIN, dispatch)
         let response = await fetch('http://192.168.0.112:8080/authentication', {
@@ -97,6 +101,20 @@ export const logIn = (credentials: Credentials) => {
             },
         })
 
-        console.log(response)
+        const data = await response.json();
+
+        if (response.status === 200) {
+            await AsyncStorage.setItem(ACCESS_TOKEN_KEY, data.jwtToken)
+            dispatch({
+                type: SUCCESS_LOGIN,
+                payload: data
+            })
+        } else if (response.status === 401) {
+            setErrorMessage(data.message)
+            dispatch({
+                type: FAIL_LOGIN,
+                payload: data
+            })
+        }
     }
 }

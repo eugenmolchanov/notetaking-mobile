@@ -48,10 +48,16 @@ interface QuestionState {
     isFetching: boolean
 }
 
+interface EntryPointState {
+    isAuthenticated: boolean,
+    isAuthenticating: boolean,
+}
+
 export interface AppState {
     disciplines: DisciplinesState
     questions: QuestionsState
-    question: QuestionState
+    question: QuestionState,
+    entryPoint: EntryPointState,
 }
 
 export interface Action {
